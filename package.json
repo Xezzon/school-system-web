@@ -1,0 +1,8 @@
+{
+    "name": "school-system-web",
+    "version": "1.0.0",
+    "private": true,
+    "repository": "https://github.com/Xezzon/school-system-web",
+    "author": "Dingxuan Jiang <yzjdx4399@Gmail.com>",
+    "license": "Apache-2.0"
+}
