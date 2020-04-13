@@ -4,5 +4,46 @@
     "private": true,
     "repository": "https://github.com/Xezzon/school-system-web",
     "author": "Dingxuan Jiang <yzjdx4399@Gmail.com>",
-    "license": "Apache-2.0"
+    "license": "Apache-2.0",
+    "scripts": {
+        "lint": "",
+        "watch": "cross-env webpack-dev-server --config webpack.dev.js",
+        "deploy": "cross-env webpack --config webpack.prod.js --progress"
+    },
+    "dependencies": {
+        "antd": "^4.1.2",
+        "axios": "^0.19.2",
+        "axios-hooks": "^1.9.0",
+        "clean-webpack-plugin": "^3.0.0",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "react-router-dom": "^5.1.2"
+    },
+    "devDependencies": {
+        "@babel/plugin-proposal-class-properties": "^7.8.3",
+        "@babel/plugin-transform-runtime": "^7.9.0",
+        "@babel/preset-env": "^7.9.5",
+        "@babel/preset-react": "^7.9.4",
+        "antd-dayjs-webpack-plugin": "^1.0.0",
+        "babel-loader": "^8.1.0",
+        "babel-plugin-jsx-control-statements": "^4.1.0",
+        "compression-webpack-plugin": "^3.1.0",
+        "css-loader": "^3.5.2",
+        "dynamic-cdn-webpack-plugin": "^5.0.0",
+        "eslint": "^6.8.0",
+        "html-webpack-plugin": "^4.2.0",
+        "less": "^3.11.1",
+        "less-loader": "^5.0.0",
+        "mini-css-extract-plugin": "^0.9.0",
+        "optimize-css-assets-webpack-plugin": "^5.0.3",
+        "speed-measure-webpack-plugin": "^1.3.3",
+        "stylelint": "^13.3.2",
+        "stylelint-config-standard": "^20.0.0",
+        "thread-loader": "^2.1.3",
+        "webpack": "^4.42.1",
+        "webpack-bundle-analyzer": "^3.6.1",
+        "webpack-cli": "^3.3.11",
+        "webpack-dev-server": "^3.10.3",
+        "webpack-merge": "^4.2.2"
+    }
 }

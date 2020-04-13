@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" charset="UTF-8" />
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <link rel="icon" href="" />
+        <title><%= htmlWebpackPlugin.options.title %></title>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/antd@4.0.0-alpha.5/dist/antd.min.css" />
+    </head>
+
+    <body>
+        <div id="rc">
+            <div
+                class="spinner-grow text-info"
+                role="status"
+                style="width: 3rem; height: 3rem; position: fixed; top: 50vh; left: 50vw;"
+            >
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+
+        <!-- 由于前端是基于React的，所以当浏览器禁用JavaScript时，需要提醒用户启用JavaScript -->
+        <noscript>
+            <h1 title="点击进入参考" class="display-4">
+                <a href="https://www.cnblogs.com/jshare/p/7783109.html">您需要启用JavaScript以支持本网站的运行</a>
+            </h1>
+            <h1 title="redict to reference" class="display-4">
+                <a href="https://www.cnblogs.com/jshare/p/7783109.html"
+                    >You need to enable JavaScript to run this app.</a
+                >
+            </h1>
+        </noscript>
+        <script src="//cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/react/umd/react.production.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/react-router-dom/umd/react-router-dom.min.js"></script>
+    </body>
+</html>
