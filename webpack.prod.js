@@ -2,6 +2,7 @@ const OptimizeCSSAssertsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const merge = require('webpack-merge');
@@ -43,6 +44,13 @@ const webpackProdConfig = {
         minimizer: [
             // 压缩CSS
             new OptimizeCSSAssertsPlugin(),
+            // 压缩JS
+            new TerserPlugin({
+                test: /\.js[x]?$/,
+                exclude: /node_module/,
+                parallel: true,
+                terserOptions: { compress: { pure_funcs: ['console.debug'] } },
+            }),
         ],
     },
     plugins: [
@@ -57,7 +65,6 @@ const webpackProdConfig = {
             algorithm: 'gzip',
             test: /\.(js|css)$/,
             exclude: /node_module/,
-            deleteOriginalAssets: true,
         }),
         new BundleAnalyzerPlugin({
             analyzerMode: 'static',
