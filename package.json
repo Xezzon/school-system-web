@@ -5,10 +5,17 @@
     "repository": "https://github.com/Xezzon/school-system-web",
     "author": "Dingxuan Jiang <yzjdx4399@Gmail.com>",
     "license": "Apache-2.0",
+    "sideEffects": ["dist/*", "*.less"],
     "scripts": {
-        "lint": "",
-        "watch": "cross-env webpack-dev-server --config webpack.dev.js",
-        "deploy": "cross-env webpack --config webpack.prod.js --progress"
+        "lint": "npm run lint:style && npm run lint:script",
+        "lint:style": "node_modules/.bin/stylelint 'src/**/*.less' --syntax less",
+        "lint:script": "node_modules/.bin/eslint src --ext '.js,.jsx'",
+        "lint-fix": "npm run lint-fix:style && npm run lint-fix:script",
+        "lint-fix:style": "npm run lint:style -- --fix",
+        "lint-fix:script": "npm run lint:script -- --fix",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "webpack:build": "node_modules/.bin/webpack --config webpack.prod.js --progress",
+        "webpack:watch": "node_modules/.bin/webpack-dev-server --config webpack.dev.js"
     },
     "dependencies": {
         "antd": "^4.1.2",
@@ -32,6 +39,7 @@
         "css-loader": "^3.5.2",
         "dynamic-cdn-webpack-plugin": "^5.0.0",
         "eslint": "^6.8.0",
+        "eslint-plugin-react": "^7.19.0",
         "html-webpack-plugin": "^4.2.0",
         "less": "^3.11.1",
         "less-loader": "^5.0.0",
