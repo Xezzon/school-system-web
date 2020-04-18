@@ -4,6 +4,7 @@ import { makeUseAxios } from 'axios-hooks';
 const instance = Axios.create();
 
 instance.defaults.headers['Cache-Control'] = 'no-cache';
+instance.defaults.baseURL = '/api'
 
 instance.interceptors.request.use((config) => {
     config.headers['X-XSRF-TOKEN'] = sessionStorage.getItem('AccessToken') || '';

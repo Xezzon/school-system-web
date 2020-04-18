@@ -17,7 +17,11 @@ const webpackDevConfig = {
         compress: true,
         // 动态请求转发
         proxy: {
-            '/': 'http://yapi.demo.qunar.com/mock/79010',
+            '/api': {
+                target: 'http://www.sosoapi.com/pass/mock/17842/',
+                changeOrigin: true,
+                pathRewrite: { '^/api': '' },
+            },
         },
     },
 };
