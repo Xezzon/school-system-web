@@ -2,6 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const resolve = (relativePath) => path.resolve(__dirname, relativePath);
 
@@ -65,6 +66,13 @@ const webpackCommonConfig = {
                     ...options,
                 })
         ),
+        new CopyWebpackPlugin([
+            {
+                from: resolve('./src/resources'),
+                to: 'static',
+                cache: true,
+            },
+        ]),
         new AntdDayjsWebpackPlugin(),
     ],
     externals: {
