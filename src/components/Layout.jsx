@@ -1,5 +1,7 @@
 import React from 'react';
 import Layout from 'antd/es/layout';
+import ArrowUpOutlined from '@ant-design/icons/ArrowUpOutlined';
+import ArrowDownOutlined from '@ant-design/icons/ArrowDownOutlined';
 
 function Header() {
     return <React.Fragment></React.Fragment>;
@@ -10,7 +12,28 @@ function Footer() {
 }
 
 function SideToolbar() {
-    return <React.Fragment></React.Fragment>;
+    return (
+        <div className="side-toolbar btn-group-vertical" style={{ position: 'fixed', bottom: '89px', right: '21px' }}>
+            <button
+                type="button"
+                className="bg-transparent btn btn-light"
+                onClick={() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+            >
+                <ArrowUpOutlined />
+            </button>
+            <button
+                type="button"
+                className="bg-transparent btn btn-light"
+                onClick={() => {
+                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                }}
+            >
+                <ArrowDownOutlined />
+            </button>
+        </div>
+    );
 }
 
 function BasicLayout({ children }) {
