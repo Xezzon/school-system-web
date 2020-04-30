@@ -15,9 +15,9 @@ import MenuUnfoldOutlined from '@ant-design/icons/MenuUnfoldOutlined';
 function BasicLayout({ children }) {
     return (
         <Layout>
-            <Layout.Header className="sticky-top p-0 bg-light">
+            <Layout.Header className="sticky-top p-0 bg-light shadow-sm">
                 <Row className="d-flex navbar-expand" style={{ height: '64px' }}>
-                    <Col xs={23} md={23} lg={6} xl={5} xxl={4}>
+                    <Col xs={23} lg={6} xl={5} xxl={4}>
                         <div id="brand" className="text-center">
                             <a href="/" className="text-dark h1">
                                 logo
