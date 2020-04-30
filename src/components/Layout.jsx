@@ -91,7 +91,7 @@ function BannerLayout({ menu, children }) {
                             {menu}
                         </Layout.Sider>
                     </Col>
-                    <Col xs={1} lg={0}>
+                    <Col xs={2} lg={0}>
                         <Button
                             type="dashed"
                             style={{
@@ -120,7 +120,7 @@ function BannerLayout({ menu, children }) {
                             </div>
                         </Drawer>
                     </Col>
-                    <Col xs={23} lg={18} xl={19} xxl={20}>
+                    <Col xs={22} lg={18} xl={19} xxl={20}>
                         <Layout.Content className="px-3">
                             <Card className="p-2">{children}</Card>
                         </Layout.Content>
