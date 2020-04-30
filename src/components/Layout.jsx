@@ -1,9 +1,10 @@
 import React from 'react';
-import { Layout, Dropdown, Menu, Button, Row, Col, Card } from 'antd';
+import { Layout, Dropdown, Menu, Button, Row, Col, Card, Affix, Drawer } from 'antd';
 import ArrowUpOutlined from '@ant-design/icons/ArrowUpOutlined';
 import ArrowDownOutlined from '@ant-design/icons/ArrowDownOutlined';
 import UnorderedListOutlined from '@ant-design/icons/UnorderedListOutlined';
 import DownOutLined from '@ant-design/icons/DownOutlined';
+import MenuUnfoldOutlined from '@ant-design/icons/MenuUnfoldOutlined';
 
 // TODO: 目前的布局冗余很大
 
@@ -44,18 +45,90 @@ function BasicLayout({ children }) {
     );
 }
 
+/**
+ * 通栏布局
+ * 适用于同时需要前端路由和后端路由的情况
+ */
 function BannerLayout({ menu, children }) {
+    let [drawerVisible, setDrawerVisible] = React.useState(false);
+    let showDrawer = () => {
+        setDrawerVisible(true);
+    };
+    let closeDrawer = () => {
+        setDrawerVisible(false);
+    };
+
     return (
         <Layout>
-            <Layout.Header>
-                <span className="logo"></span>
+            <Layout.Header className="sticky-top p-0 bg-light shadow-sm">
+                <Row className="d-flex navbar-expand" style={{ height: '64px' }}>
+                    <Col xs={23} md={23} lg={6} xl={5} xxl={4}>
+                        <div id="brand" className="text-center">
+                            <a href="/" className="text-dark h1">
+                                logo
+                            </a>
+                        </div>
+                    </Col>
+                    <Col xs={0} lg={18} xl={19} xxl={20}>
+                        <Header collapse={false} />
+                    </Col>
+                    <Col xs={1} lg={0}>
+                        <Header collapse={true} />
+                    </Col>
+                </Row>
             </Layout.Header>
-            <Layout>
-                <Layout.Sider>{menu}</Layout.Sider>
-                <Layout>
-                    <Layout.Content>{children}</Layout.Content>
-                    <Layout.Footer></Layout.Footer>
-                </Layout>
+            <Layout className="pt-4">
+                <Row className="d-flex w-100" justify="end">
+                    <Col xs={0} lg={6} xl={5} xxl={4}>
+                        <Layout.Sider
+                            theme="light"
+                            className="position-fixed overflow-auto"
+                            width="inherit"
+                            style={{ height: 'calc(100vh - 1.5rem - 64px)' }}
+                            breakpoint="lg"
+                            collapsedWidth={0}
+                        >
+                            {menu}
+                        </Layout.Sider>
+                    </Col>
+                    <Col xs={1} lg={0}>
+                        <Button
+                            type="dashed"
+                            style={{
+                                position: 'fixed',
+                                left: 0,
+                                top: document.body.clientHeight / 3,
+                                backgroundColor: 'transparent',
+                            }}
+                            onClick={showDrawer}
+                        >
+                            <MenuUnfoldOutlined />
+                        </Button>
+                        <Drawer
+                            placement="left"
+                            visible={drawerVisible}
+                            style={{ top: 'calc(64px + 1.5rem)' }}
+                            closable={false}
+                            onClose={closeDrawer}
+                            bodyStyle={{ padding: 0, width: 'auto' }}
+                        >
+                            <div
+                                className="overflow-auto"
+                                style={{ width: 'inherit', height: 'calc(100vh - 1.5rem - 64px)' }}
+                            >
+                                {menu}
+                            </div>
+                        </Drawer>
+                    </Col>
+                    <Col xs={23} lg={18} xl={19} xxl={20}>
+                        <Layout.Content className="px-3">
+                            <Card className="p-2">{children}</Card>
+                        </Layout.Content>
+                        <Layout.Footer>
+                            <Footer />
+                        </Layout.Footer>
+                    </Col>
+                </Row>
             </Layout>
         </Layout>
     );
