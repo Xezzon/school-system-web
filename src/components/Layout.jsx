@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Dropdown, Menu, Button } from 'antd';
+import { Layout, Dropdown, Menu, Button, Row, Col, Card } from 'antd';
 import ArrowUpOutlined from '@ant-design/icons/ArrowUpOutlined';
 import ArrowDownOutlined from '@ant-design/icons/ArrowDownOutlined';
 import UnorderedListOutlined from '@ant-design/icons/UnorderedListOutlined';
@@ -113,16 +113,39 @@ function SideToolbar() {
     );
 }
 
+/**
+ * 顶部导航布局
+ * 适合无前端路由的多页应用
+ */
 function BasicLayout({ children }) {
     return (
         <Layout>
-            <Layout.Header>
-                <span className="logo"></span>
+            <Layout.Header className="sticky-top p-0 bg-light">
+                <Row className="d-flex navbar-expand" style={{ height: '64px' }}>
+                    <Col xs={23} md={23} lg={6} xl={5} xxl={4}>
+                        <div id="brand" className="text-center">
+                            <a href="/" className="text-dark h1">
+                                logo
+                            </a>
+                        </div>
+                    </Col>
+                    <Col xs={0} lg={18} xl={19} xxl={20}>
+                        <Header collapse={false} />
+                    </Col>
+                    <Col xs={1} lg={0}>
+                        <Header collapse={true} />
+                    </Col>
+                </Row>
             </Layout.Header>
             <Layout>
-                <Layout.Content>{children}</Layout.Content>
-                <Layout.Footer></Layout.Footer>
+                <Layout.Content className="p-3">
+                    <Card>{children}</Card>
+                </Layout.Content>
+                <Layout.Footer>
+                    <Footer />
+                </Layout.Footer>
             </Layout>
+            <SideToolbar />
         </Layout>
     );
 }
