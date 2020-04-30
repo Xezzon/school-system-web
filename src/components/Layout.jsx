@@ -1,6 +1,18 @@
 import React from 'react';
 import Layout from 'antd/es/layout';
 
+function Header() {
+    return <React.Fragment></React.Fragment>;
+}
+
+function Footer() {
+    return <React.Fragment></React.Fragment>;
+}
+
+function SideToolbar() {
+    return <React.Fragment></React.Fragment>;
+}
+
 function BasicLayout({ children }) {
     return (
         <Layout>
