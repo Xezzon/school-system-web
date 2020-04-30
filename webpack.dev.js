@@ -12,6 +12,7 @@ const webpackDevConfig = {
     ],
     // 静态服务器配置
     devServer: {
+        host: '0.0.0.0',
         port: '9090',
         // 允许gzip
         compress: true,
