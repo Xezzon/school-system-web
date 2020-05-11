@@ -43,6 +43,7 @@ function AuthenticationModal({ rc = document.body }) {
 
     return (
         <Modal
+            title="登录"
             visible={true}
             maskClosable={false}
             closable={false}
