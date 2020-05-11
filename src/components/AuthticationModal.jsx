@@ -19,7 +19,7 @@ function AuthenticationModal({ rc = document.body }) {
                 document.body.removeChild(rc);
             }
         };
-    });
+    }, []);
 
     let submitForm = () => {
         form.validateFields()
