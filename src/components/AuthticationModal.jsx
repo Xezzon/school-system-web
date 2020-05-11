@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Modal, Form, Input, Checkbox } from 'antd';
+import { Modal, Form, Input, Checkbox, Alert } from 'antd';
+import instance from '@/lib/axios';
 
 /**
  * 登录对话框
@@ -11,6 +12,7 @@ import { Modal, Form, Input, Checkbox } from 'antd';
 function AuthenticationModal({ rc = document.body }) {
     let [form] = Form.useForm();
     let [visible, setVisible] = React.useState(true);
+    let [authenticationFailed, setAuthenticationFailed] = React.useState();
 
     React.useEffect(() => {
         return () => {
@@ -23,9 +25,17 @@ function AuthenticationModal({ rc = document.body }) {
     let submitForm = () => {
         form.validateFields()
             .then((values) => {
-                form.resetFields();
-                console.debug(values);
-                setVisible(false);
+                instance
+                    .post('/passport/login', values)
+                    .then(({ data }) => {
+                        sessionStorage.setItem('AccessToken', data);
+                        form.resetFields();
+                        setVisible(false);
+                    })
+                    .catch((error) => {
+                        form.resetFields(['cipher']);
+                        setAuthenticationFailed(error.response.data);
+                    });
             })
             .catch((info) => {
                 console.error(info);
@@ -44,6 +54,7 @@ function AuthenticationModal({ rc = document.body }) {
             getContainer={rc}
         >
             <Form form={form} name="login" initialValues={{ rememberMe: false }}>
+                {!authenticationFailed || <Alert type="error" message={authenticationFailed} />}
                 <Form.Item label="用户名" name="username" rules={[{ required: true, message: '请输入用户名' }]}>
                     <Input />
                 </Form.Item>
