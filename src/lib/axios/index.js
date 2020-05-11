@@ -13,11 +13,14 @@ instance.interceptors.request.use((config) => {
 });
 
 instance.interceptors.response.use(
-    (response) => {},
+    (response) => {
+        return response;
+    },
     (error) => {
         if (error.response.status === 401) {
             AuthenticationModal.show();
         }
+        return error;
     }
 );
 
