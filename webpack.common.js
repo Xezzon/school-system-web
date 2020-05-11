@@ -13,8 +13,9 @@ const webpackCommonConfig = {
     output: { path: resolve('./dist') },
     resolve: {
         alias: {
-            '@': resolve('./src')
+            '@': resolve('./src'),
         },
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', 'wasm'],
     },
     module: {
         rules: [
@@ -52,9 +53,7 @@ const webpackCommonConfig = {
     },
     plugins: [
         // 打包HTML并注入CSS、JS
-        ...[
-            { chunk: 'index', title: '导航页' }
-        ].map(
+        ...[{ chunk: 'index', title: '导航页' }].map(
             ({ chunk, ...options }) =>
                 new HtmlWebpackPlugin({
                     template: resolve('./src/common.html'),
