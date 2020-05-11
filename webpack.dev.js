@@ -6,6 +6,7 @@ const webpackDevConfig = {
     // 开发模式。
     mode: 'development',
     output: { filename: '[name]-[chunkhash].js' },
+    devtool: 'inline-source-map',
     plugins: [
         // 抽取CSS
         new MiniCssExtractPlugin({ filename: '[name]-[chunkhash].min.css' }),
