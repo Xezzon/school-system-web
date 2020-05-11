@@ -11,7 +11,6 @@ import instance from '@/lib/axios';
  */
 function AuthenticationModal({ rc = document.body }) {
     let [form] = Form.useForm();
-    let [visible, setVisible] = React.useState(true);
     let [authenticationFailed, setAuthenticationFailed] = React.useState();
 
     React.useEffect(() => {
@@ -30,7 +29,7 @@ function AuthenticationModal({ rc = document.body }) {
                     .then(({ data }) => {
                         sessionStorage.setItem('AccessToken', data);
                         form.resetFields();
-                        setVisible(false);
+                        ReactDOM.unmountComponentAtNode(rc);
                     })
                     .catch((error) => {
                         form.resetFields(['cipher']);
@@ -44,7 +43,7 @@ function AuthenticationModal({ rc = document.body }) {
 
     return (
         <Modal
-            visible={visible}
+            visible={true}
             maskClosable={false}
             closable={false}
             cancelButtonProps={{ disabled: true }}
