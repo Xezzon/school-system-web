@@ -8,15 +8,12 @@ const resolve = (relativePath) => path.resolve(__dirname, relativePath);
 
 const webpackCommonConfig = {
     entry: {
-        index: '@pages/index',
+        index: '@/pages/index',
     },
     output: { path: resolve('./dist') },
     resolve: {
         alias: {
-            '@pages': resolve('./src/pages'),
-            '@components': resolve('./src/components'),
-            '@lib': resolve('./src/lib'),
-            '@util': resolve('./src/util'),
+            '@': resolve('./src')
         },
     },
     module: {

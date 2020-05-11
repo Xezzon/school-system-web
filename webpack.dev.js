@@ -12,13 +12,14 @@ const webpackDevConfig = {
     ],
     // 静态服务器配置
     devServer: {
+        host: '0.0.0.0',
         port: '9090',
         // 允许gzip
         compress: true,
         // 动态请求转发
         proxy: {
             '/api': {
-                target: 'http://www.sosoapi.com/pass/mock/17842/',
+                target: 'https://nei.netease.com/api/apimock-v2/ec1c48031cd790750f64146ff6e8024c/',
                 changeOrigin: true,
                 pathRewrite: { '^/api': '' },
             },
