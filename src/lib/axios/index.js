@@ -1,10 +1,11 @@
 import Axios from 'axios';
 import { makeUseAxios } from 'axios-hooks';
+import { AuthenticationModal } from '@/components';
 
 const instance = Axios.create();
 
 instance.defaults.headers['Cache-Control'] = 'no-cache';
-instance.defaults.baseURL = '/api'
+instance.defaults.baseURL = '/api';
 
 instance.interceptors.request.use((config) => {
     config.headers['X-XSRF-TOKEN'] = sessionStorage.getItem('AccessToken') || '';
@@ -13,7 +14,11 @@ instance.interceptors.request.use((config) => {
 
 instance.interceptors.response.use(
     (response) => {},
-    (error) => {}
+    (error) => {
+        if (error.response.status === 401) {
+            AuthenticationModal.show();
+        }
+    }
 );
 
 const requestMethod = { GET: 'get', POST: 'post', PUT: 'put', DELETE: 'delete' };
