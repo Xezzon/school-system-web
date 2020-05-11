@@ -19,7 +19,7 @@ const webpackDevConfig = {
         // 动态请求转发
         proxy: {
             '/api': {
-                target: 'http://www.sosoapi.com/pass/mock/17842/',
+                target: 'https://nei.netease.com/api/apimock-v2/ec1c48031cd790750f64146ff6e8024c/',
                 changeOrigin: true,
                 pathRewrite: { '^/api': '' },
             },
