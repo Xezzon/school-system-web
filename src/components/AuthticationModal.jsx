@@ -27,7 +27,7 @@ function AuthenticationModal({ rc = document.body }) {
                 instance
                     .post('/passport/login', values)
                     .then(({ data }) => {
-                        sessionStorage.setItem('AccessToken', data);
+                        sessionStorage.setItem('user', data);
                         form.resetFields();
                         ReactDOM.unmountComponentAtNode(rc);
                     })
