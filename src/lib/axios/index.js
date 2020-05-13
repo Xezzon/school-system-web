@@ -8,7 +8,7 @@ instance.defaults.headers['Cache-Control'] = 'no-cache';
 instance.defaults.baseURL = '/api';
 
 instance.interceptors.request.use((config) => {
-    config.headers['X-XSRF-TOKEN'] = sessionStorage.getItem('AccessToken') || '';
+    config.headers['X-XSRF-TOKEN'] = sessionStorage.getItem('user')['accessToken'] || '';
     return config;
 });
 
