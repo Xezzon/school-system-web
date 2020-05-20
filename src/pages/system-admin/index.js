@@ -1,0 +1,42 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BannerLayout as Layout } from '@/components/Layout';
+import { Menu } from 'antd';
+import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+
+function SystemAdminSideNav() {
+    return (
+        <Menu
+            defaultSelectedKeys={[location.hash.slice(1) || '/dashboard']}
+            onSelect={({ key }) => {
+                location.hash = key;
+            }}
+        >
+            <Menu.Item key="/dashboard">系统运行情况</Menu.Item>
+            <Menu.Item key="/register">注册</Menu.Item>
+            <Menu.Item key="/department">部门管理</Menu.Item>
+            <Menu.Item key="/calendar">校历</Menu.Item>
+        </Menu>
+    );
+}
+
+function SystemAdminPage() {
+    return (
+        <Router>
+            <Redirect from='/' to='dashboard'/>
+            <Switch>
+                <Route path="/dashboard" component={React.Fragment} />
+                <Route path="/register" component={React.Fragment} />
+                <Route path="/department" component={React.Fragment} />
+                <Route path="/calendar" component={React.Fragment} />
+            </Switch>
+        </Router>
+    );
+}
+
+ReactDOM.render(
+    <Layout menu={<SystemAdminSideNav />}>
+        <SystemAdminPage />
+    </Layout>,
+    document.getElementById('rc')
+);
