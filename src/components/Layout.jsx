@@ -77,12 +77,12 @@ function BannerLayout({ menu, children }) {
                     </Col>
                 </Row>
             </Layout.Header>
-            <Layout className="pt-4">
+            <Layout className="pt-4" style={{minHeight: 'calc(100vh - 64px)'}}>
                 <Row className="d-flex w-100" justify="end">
                     <Col xs={0} lg={6} xl={5} xxl={4}>
                         <Layout.Sider
                             theme="light"
-                            className="position-fixed overflow-auto"
+                            className="position-fixed overflow-auto border-right"
                             width="inherit"
                             style={{ height: 'calc(100vh - 1.5rem - 64px)' }}
                             breakpoint="lg"
