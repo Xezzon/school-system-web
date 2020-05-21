@@ -1,5 +1,6 @@
 import React from 'react';
-import { Table, Button, Popconfirm, Dropdown, Menu, Input, Modal, Form } from 'antd';
+import { Table, Button, Popconfirm, Dropdown, Menu, Input, Modal, Form, Upload } from 'antd';
+import Papa from 'papaparse';
 import staticModal from '@/hoc/staticModal';
 
 function DepartmentPage() {
@@ -7,6 +8,16 @@ function DepartmentPage() {
 
     let handleTableChange = (pagination, filter, sorter) => {
         setPage({ ...page, current: pagination.current });
+    };
+    let handleExportCSV = () => {
+        let csv = 'id,部门名称,英文名,联系电话,email\n';
+        let download = document.createElement('a');
+        download.href = 'data:text/csv;utf-8,' + csv;
+        download.download = '部门表.csv';
+        download.click();
+    };
+    let handleImportCSV = (file) => {
+        Papa.parse(file, { complete: console.debug });
     };
 
     return (
@@ -16,6 +27,17 @@ function DepartmentPage() {
                     <Input.Search></Input.Search>
                 </div>
                 <div className="table-toolkit-right">
+                    <Button onClick={handleExportCSV}>导出模板</Button>
+                    <Upload
+                        accept=".csv"
+                        showUploadList={false}
+                        beforeUpload={(file) => {
+                            handleImportCSV(file);
+                            return false;
+                        }}
+                    >
+                        <Button>批量导入</Button>
+                    </Upload>
                     <Dropdown.Button
                         overlay={
                             <Menu>
@@ -23,6 +45,7 @@ function DepartmentPage() {
                             </Menu>
                         }
                         trigger={['click']}
+                        onClick={DepartmentEditModal.show}
                     >
                         添加...
                     </Dropdown.Button>
