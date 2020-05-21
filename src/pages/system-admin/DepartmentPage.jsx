@@ -2,6 +2,12 @@ import React from 'react';
 import { Table, Button, Popconfirm, Dropdown, Menu, Input } from 'antd';
 
 function DepartmentPage() {
+    let [page, setPage] = React.useState({ current: 1, pageSize: 15 });
+
+    let handleTableChange = (pagination, filter, sorter) => {
+        setPage({ ...page, current: pagination.current });
+    };
+
     return (
         <React.Fragment>
             <div className="table-toolkit clearfix">
@@ -21,8 +27,17 @@ function DepartmentPage() {
                     </Dropdown.Button>
                 </div>
             </div>
-            <Table rowKey={(record) => record.id} dataSource={dataSource}>
-                <Table.Column title="编号" dataIndex="id" />
+            <Table
+                rowKey={(record) => record.id}
+                dataSource={dataSource}
+                pagination={page}
+                onChange={handleTableChange}
+            >
+                <Table.Column
+                    title="编号"
+                    key="index"
+                    render={(text, record, index) => (page.current - 1) * page.pageSize + (index + 1)}
+                />
                 <Table.Column title="部门名称" dataIndex="name" />
                 <Table.Column title="电话" dataIndex="tel" />
                 <Table.Column title="email" dataIndex="email" />
