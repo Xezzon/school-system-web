@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import { BannerLayout as Layout } from '@/components/Layout';
 import { Menu } from 'antd';
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { lazyload } from '@/util/lazyload';
+
+const DepartmentPage = lazyload(() => import('./DepartmentPage'));
 
 function SystemAdminSideNav() {
     return (
@@ -23,11 +26,11 @@ function SystemAdminSideNav() {
 function SystemAdminPage() {
     return (
         <Router>
-            <Redirect from='/' to='dashboard'/>
+            <Redirect from="/" to="dashboard" />
             <Switch>
                 <Route path="/dashboard" component={React.Fragment} />
                 <Route path="/register" component={React.Fragment} />
-                <Route path="/department" component={React.Fragment} />
+                <Route path="/department" component={DepartmentPage} />
                 <Route path="/calendar" component={React.Fragment} />
             </Switch>
         </Router>
