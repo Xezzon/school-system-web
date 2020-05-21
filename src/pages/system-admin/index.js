@@ -39,7 +39,7 @@ function SystemAdminPage() {
 }
 
 ReactDOM.render(
-    <Layout menu={<SystemAdminSideNav />}>
+    <Layout menu={<SystemAdminSideNav />} style={style}>
         <SystemAdminPage />
     </Layout>,
     document.getElementById('rc')
