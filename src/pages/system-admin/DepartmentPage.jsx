@@ -39,7 +39,7 @@ function DepartmentPage() {
                     key="index"
                     render={(text, record, index) => (page.current - 1) * page.pageSize + (index + 1)}
                 />
-                <Table.Column title="部门名称" dataIndex="name" />
+                <Table.Column title="部门名称" dataIndex="cname" />
                 <Table.Column title="电话" dataIndex="tel" />
                 <Table.Column title="email" dataIndex="email" />
                 <Table.Column
