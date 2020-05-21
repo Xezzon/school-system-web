@@ -4,6 +4,7 @@ import { BannerLayout as Layout } from '@/components/Layout';
 import { Menu } from 'antd';
 import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { lazyload } from '@/util/lazyload';
+import style from './index.less';
 
 const DepartmentPage = lazyload(() => import('./DepartmentPage'));
 
