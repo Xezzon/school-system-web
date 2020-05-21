@@ -26,12 +26,12 @@ function SystemAdminSideNav() {
 function SystemAdminPage() {
     return (
         <Router>
-            <Redirect from="/" to="dashboard" />
             <Switch>
                 <Route path="/dashboard" component={React.Fragment} />
                 <Route path="/register" component={React.Fragment} />
                 <Route path="/department" component={DepartmentPage} />
                 <Route path="/calendar" component={React.Fragment} />
+                <Redirect exact from="/" to="dashboard" />
             </Switch>
         </Router>
     );
