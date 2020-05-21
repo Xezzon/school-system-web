@@ -16,6 +16,10 @@ function JsdeliverCdn(moduleName, version, options) {
             var: 'axios',
             path: 'dist/axios.min.js',
         },
+        papaparse: {
+            var: 'Papa',
+            path: 'papaparse.min.js',
+        },
     };
 
     if (typeof moduleName !== 'string') {
