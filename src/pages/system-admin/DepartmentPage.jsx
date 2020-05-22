@@ -38,9 +38,18 @@ function DepartmentPage() {
                     <Input.Search></Input.Search>
                 </div>
                 <div className="table-toolkit-right">
-                    <Button type="primary" onClick={DepartmentEditModal.show}>
-                        添加
-                    </Button>
+                    <Dropdown.Button
+                        type="primary"
+                        trigger={['click']}
+                        overlay={
+                            <Menu>
+                                <Menu.Item onClick={DepartmentAddModal.show}>批量添加...</Menu.Item>
+                            </Menu>
+                        }
+                        onClick={DepartmentEditModal.show}
+                    >
+                        添加...
+                    </Dropdown.Button>
                 </div>
             </div>
             <DepartmentTable dataSource={dataSource} operable />
@@ -140,5 +149,51 @@ function DepartmentEditModal({
     );
 }
 DepartmentEditModal = staticModal(DepartmentEditModal);
+
+function DepartmentAddModal({ container = document.body }) {
+    let [dataSource, setDataSource] = React.useState();
+
+    let handleModalHide = () => {
+        ReactDOM.unmountComponentAtNode(container);
+    };
+    let handleExportCSV = () => {
+        let csv = 'id,部门名称,英文名,联系电话,email\n';
+        let download = document.createElement('a');
+        download.href = 'data:text/csv;utf-8,' + csv;
+        download.download = '部门表.csv';
+        download.click();
+    };
+    let handleImportCSV = () => {
+        let upload = document.createElement('input');
+        upload.type = 'file';
+        upload.onchange = () => {
+            Papa.parse(upload.files[0], {
+                header: true,
+                complete: (results) => {
+                    let resultsData = results.data.map((result) => {
+                        let { id, 部门名称: cname, 英文名: name, 联系电话: tel, email } = result;
+                        return { id, name, cname, tel, email };
+                    });
+                    setDataSource(resultsData);
+                },
+            });
+        };
+        upload.click();
+    };
+
+    return (
+        <Modal title="添加部门" visible={true} getContainer={container} onCancel={handleModalHide} width="80vw">
+            <div className="table-toolkit clearfix">
+                <div className="table-toolkit-left"></div>
+                <div className="table-toolkit-right">
+                    <Button onClick={handleExportCSV}>导出模板</Button>
+                    <Button onClick={handleImportCSV}>从模板中导入</Button>
+                </div>
+            </div>
+            <DepartmentTable dataSource={dataSource} />
+        </Modal>
+    );
+}
+DepartmentAddModal = staticModal(DepartmentAddModal);
 
 export default DepartmentPage;
