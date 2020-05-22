@@ -9,8 +9,13 @@ import { AuthContext } from '@/context/auth';
  */
 const withPermissions = (WrappedComponent, requiredPermissions, FeedbackComponent) => {
     let user = React.useContext(AuthContext);
-    console.debug(requiredPermissions, user, user.permissions.includes(...requiredPermissions))
-    return user.permissions.includes(...requiredPermissions) ? WrappedComponent : FeedbackComponent;
+    console.debug(requiredPermissions, user, user.permissions.includes(...requiredPermissions));
+    return (
+        <Choose>
+            <When condition={user.permissions.includes(...requiredPermissions)}>{WrappedComponent}</When>
+            <Otherwise>{FeedbackComponent}</Otherwise>
+        </Choose>
+    );
 };
 
 export { withPermissions };
