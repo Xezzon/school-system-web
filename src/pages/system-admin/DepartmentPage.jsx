@@ -159,6 +159,7 @@ function DepartmentAddModal({ container = document.body }) {
     let handleImportCSV = () => {
         let upload = document.createElement('input');
         upload.type = 'file';
+        upload.accept = 'text/csv';
         upload.onchange = () => {
             Papa.parse(upload.files[0], {
                 header: true,
