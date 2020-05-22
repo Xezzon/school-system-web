@@ -73,7 +73,14 @@ function DepartmentTable({ dataSource, operable }) {
                     render={(text, record) => (
                         <React.Fragment>
                             <Button type="link">设置管理员</Button>
-                            <Button type="link">编辑</Button>
+                            <Button
+                                type="link"
+                                onClick={() => {
+                                    DepartmentEditModal.show({ data: record });
+                                }}
+                            >
+                                编辑
+                            </Button>
                             <Popconfirm
                                 title="确认删除？"
                                 onConfirm={() => {
@@ -90,7 +97,7 @@ function DepartmentTable({ dataSource, operable }) {
                     )}
                 />
             </If>
-            </Table>
+        </Table>
     );
 }
 
@@ -98,6 +105,8 @@ function DepartmentEditModal({
     data = { id: '', name: '', cname: '', tel: '', email: '' },
     container = document.body,
 }) {
+    let editing = !!data.id;
+
     let [form] = Form.useForm();
 
     let handleModalHide = () => {
@@ -105,10 +114,17 @@ function DepartmentEditModal({
     };
 
     return (
-        <Modal visible={true} getContainer={container} onCancel={handleModalHide}>
+        <Modal
+            title={editing ? '编辑部门' : '添加部门'}
+            visible={true}
+            getContainer={container}
+            onCancel={handleModalHide}
+            okText="确认"
+            cancelText="取消"
+        >
             <Form form={form} initialValues={data}>
                 <Form.Item name="name" label="英文名">
-                    <Input />
+                    <Input disabled={editing} />
                 </Form.Item>
                 <Form.Item name="cname" label="中文名">
                     <Input />
