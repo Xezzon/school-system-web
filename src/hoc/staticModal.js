@@ -2,7 +2,7 @@ import React from 'react';
 
 /**
  * 高阶组件 为对话框添加show静态方法
- * @param {*} WrappedComponent 对话框组件
+ * @param {React.Component} WrappedComponent 对话框组件
  */
 const staticModal = (WrappedComponent) => {
     const StaticModal = ({ rc, ...props }) => {

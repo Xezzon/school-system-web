@@ -11,6 +11,7 @@ import MenuUnfoldOutlined from '@ant-design/icons/MenuUnfoldOutlined';
 /**
  * 顶部导航布局
  * 适合无前端路由的多页应用
+ * @param {React.Component} 主内容
  */
 function BasicLayout({ children }) {
     return (
@@ -48,6 +49,8 @@ function BasicLayout({ children }) {
 /**
  * 通栏布局
  * 适用于同时需要前端路由和后端路由的情况
+ * @param {React.Component} 侧边栏菜单
+ * @param {React.Component} 主内容
  */
 function BannerLayout({ menu, children }) {
     let [drawerVisible, setDrawerVisible] = React.useState(false);

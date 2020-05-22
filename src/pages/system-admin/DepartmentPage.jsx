@@ -57,6 +57,10 @@ function DepartmentPage() {
     );
 }
 
+/**
+ * 部门表格
+ * @param {{ dataSource: { id: string, name: string, tel: string, email: string}, operable: boolean}} props
+ */
 function DepartmentTable({ dataSource, operable }) {
     let [page, setPage] = React.useState({ current: 1, pageSize: 15 });
 
@@ -109,7 +113,14 @@ function DepartmentTable({ dataSource, operable }) {
     );
 }
 
+/**
+ * 添加或编辑单个部门的表单对话框
+ * @param {{data: {id: string, name: string, tel: string, email: string}}} props
+ */
 function DepartmentEditModal({ data = { id: '', name: '', tel: '', email: '' }, container = document.body }) {
+    /**
+     * 若调用组件时未传入data是添加，否则是编辑
+     */
     let editing = !!data.id;
 
     let [form] = Form.useForm();
@@ -143,12 +154,19 @@ function DepartmentEditModal({ data = { id: '', name: '', tel: '', email: '' }, 
 }
 DepartmentEditModal = staticModal(DepartmentEditModal);
 
+/**
+ * 批量添加部门的表格对话框
+ * @param {*} props
+ */
 function DepartmentAddModal({ container = document.body }) {
     let [dataSource, setDataSource] = React.useState();
 
     let handleModalHide = () => {
         ReactDOM.unmountComponentAtNode(container);
     };
+    /**
+     * 导出模板
+     */
     let handleExportCSV = () => {
         let csv = 'id,部门名称,联系电话,email\n';
         let download = document.createElement('a');
@@ -156,9 +174,13 @@ function DepartmentAddModal({ container = document.body }) {
         download.download = '部门表.csv';
         download.click();
     };
+    /**
+     * 从模板中导入
+     */
     let handleImportCSV = () => {
         let upload = document.createElement('input');
         upload.type = 'file';
+        /* 只接受csv类型 */
         upload.accept = 'text/csv';
         upload.onchange = () => {
             Papa.parse(upload.files[0], {
