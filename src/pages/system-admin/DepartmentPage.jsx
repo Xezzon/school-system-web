@@ -90,36 +90,51 @@ function DepartmentTable({ dataSource, operable }) {
                     )}
                 />
             </If>
-            </Table>
+        </Table>
     );
 }
 
-function DepartmentEditModal({
-    data = { id: '', name: '', cname: '', tel: '', email: '' },
-    container = document.body,
-}) {
-    let [form] = Form.useForm();
+function DepartmentEditModal({ container = document.body }) {
+    let [dataSource, setDataSource] = React.useState();
 
     let handleModalHide = () => {
         ReactDOM.unmountComponentAtNode(container);
     };
+    let handleExportCSV = () => {
+        let csv = 'id,部门名称,英文名,联系电话,email\n';
+        let download = document.createElement('a');
+        download.href = 'data:text/csv;utf-8,' + csv;
+        download.download = '部门表.csv';
+        download.click();
+    };
+    let handleImportCSV = () => {
+        let upload = document.createElement('input');
+        upload.type = 'file';
+        upload.onchange = () => {
+            Papa.parse(upload.files[0], {
+                header: true,
+                complete: (results) => {
+                    let resultsData = results.data.map((result) => {
+                        let { id, 部门名称: cname, 英文名: name, 联系电话: tel, email } = result;
+                        return { id, name, cname, tel, email };
+                    });
+                    setDataSource(resultsData);
+                },
+            });
+        };
+        upload.click();
+    };
 
     return (
-        <Modal visible={true} getContainer={container} onCancel={handleModalHide}>
-            <Form form={form} initialValues={data}>
-                <Form.Item name="name" label="英文名">
-                    <Input />
-                </Form.Item>
-                <Form.Item name="cname" label="中文名">
-                    <Input />
-                </Form.Item>
-                <Form.Item name="tel" label="联系电话">
-                    <Input />
-                </Form.Item>
-                <Form.Item name="email" label="email">
-                    <Input />
-                </Form.Item>
-            </Form>
+        <Modal title="添加部门" visible={true} getContainer={container} onCancel={handleModalHide} width="80vw">
+            <div className="table-toolkit clearfix">
+                <div className="table-toolkit-left"></div>
+                <div className="table-toolkit-right">
+                    <Button onClick={handleExportCSV}>导出模板</Button>
+                    <Button onClick={handleImportCSV}>从模板中导入</Button>
+                </div>
+            </div>
+            <DepartmentTable dataSource={dataSource} />
         </Modal>
     );
 }
