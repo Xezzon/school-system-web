@@ -6,28 +6,28 @@ import staticModal from '@/hoc/staticModal';
 function DepartmentPage() {
     /* 测试数据START */
     let dataSource = [
-        { id: '1', name: 'teaching', cname: '教务处', tel: '123456', email: '123@123.com' },
-        { id: '2', name: 'jiaotong', cname: '交通学院', tel: '123456', email: '123@123.com' },
-        { id: '1', name: 'teaching', cname: '教务处', tel: '123456', email: '123@123.com' },
-        { id: '2', name: 'jiaotong', cname: '交通学院', tel: '123456', email: '123@123.com' },
-        { id: '1', name: 'teaching', cname: '教务处', tel: '123456', email: '123@123.com' },
-        { id: '2', name: 'jiaotong', cname: '交通学院', tel: '123456', email: '123@123.com' },
-        { id: '1', name: 'teaching', cname: '教务处', tel: '123456', email: '123@123.com' },
-        { id: '2', name: 'jiaotong', cname: '交通学院', tel: '123456', email: '123@123.com' },
-        { id: '1', name: 'teaching', cname: '教务处', tel: '123456', email: '123@123.com' },
-        { id: '2', name: 'jiaotong', cname: '交通学院', tel: '123456', email: '123@123.com' },
-        { id: '1', name: 'teaching', cname: '教务处', tel: '123456', email: '123@123.com' },
-        { id: '2', name: 'jiaotong', cname: '交通学院', tel: '123456', email: '123@123.com' },
-        { id: '1', name: 'teaching', cname: '教务处', tel: '123456', email: '123@123.com' },
-        { id: '2', name: 'jiaotong', cname: '交通学院', tel: '123456', email: '123@123.com' },
-        { id: '1', name: 'teaching', cname: '教务处', tel: '123456', email: '123@123.com' },
-        { id: '2', name: 'jiaotong', cname: '交通学院', tel: '123456', email: '123@123.com' },
-        { id: '1', name: 'teaching', cname: '教务处', tel: '123456', email: '123@123.com' },
-        { id: '2', name: 'jiaotong', cname: '交通学院', tel: '123456', email: '123@123.com' },
-        { id: '1', name: 'teaching', cname: '教务处', tel: '123456', email: '123@123.com' },
-        { id: '2', name: 'jiaotong', cname: '交通学院', tel: '123456', email: '123@123.com' },
-        { id: '1', name: 'teaching', cname: '教务处', tel: '123456', email: '123@123.com' },
-        { id: '2', name: 'jiaotong', cname: '交通学院', tel: '123456', email: '123@123.com' },
+        { id: '1', name: '教务处', tel: '123456', email: '123@123.com' },
+        { id: '2', name: '交通学院', tel: '123456', email: '123@123.com' },
+        { id: '1', name: '教务处', tel: '123456', email: '123@123.com' },
+        { id: '2', name: '交通学院', tel: '123456', email: '123@123.com' },
+        { id: '1', name: '教务处', tel: '123456', email: '123@123.com' },
+        { id: '2', name: '交通学院', tel: '123456', email: '123@123.com' },
+        { id: '1', name: '教务处', tel: '123456', email: '123@123.com' },
+        { id: '2', name: '交通学院', tel: '123456', email: '123@123.com' },
+        { id: '1', name: '教务处', tel: '123456', email: '123@123.com' },
+        { id: '2', name: '交通学院', tel: '123456', email: '123@123.com' },
+        { id: '1', name: '教务处', tel: '123456', email: '123@123.com' },
+        { id: '2', name: '交通学院', tel: '123456', email: '123@123.com' },
+        { id: '1', name: '教务处', tel: '123456', email: '123@123.com' },
+        { id: '2', name: '交通学院', tel: '123456', email: '123@123.com' },
+        { id: '1', name: '教务处', tel: '123456', email: '123@123.com' },
+        { id: '2', name: '交通学院', tel: '123456', email: '123@123.com' },
+        { id: '1', name: '教务处', tel: '123456', email: '123@123.com' },
+        { id: '2', name: '交通学院', tel: '123456', email: '123@123.com' },
+        { id: '1', name: '教务处', tel: '123456', email: '123@123.com' },
+        { id: '2', name: '交通学院', tel: '123456', email: '123@123.com' },
+        { id: '1', name: '教务处', tel: '123456', email: '123@123.com' },
+        { id: '2', name: '交通学院', tel: '123456', email: '123@123.com' },
     ];
     /* 测试数据END */
 
@@ -71,8 +71,7 @@ function DepartmentTable({ dataSource, operable }) {
                 key="index"
                 render={(text, record, index) => (page.current - 1) * page.pageSize + (index + 1)}
             />
-            <Table.Column title="部门名称" dataIndex="cname" editable={true} />
-            <Table.Column title="英文名" dataIndex="name" />
+            <Table.Column title="部门名称" dataIndex="name" editable={true} />
             <Table.Column title="电话" dataIndex="tel" editable={true} />
             <Table.Column title="email" dataIndex="email" editable={true} />
             <If condition={operable}>
@@ -110,10 +109,7 @@ function DepartmentTable({ dataSource, operable }) {
     );
 }
 
-function DepartmentEditModal({
-    data = { id: '', name: '', cname: '', tel: '', email: '' },
-    container = document.body,
-}) {
+function DepartmentEditModal({ data = { id: '', name: '', tel: '', email: '' }, container = document.body }) {
     let editing = !!data.id;
 
     let [form] = Form.useForm();
@@ -132,10 +128,7 @@ function DepartmentEditModal({
             cancelText="取消"
         >
             <Form form={form} initialValues={data}>
-                <Form.Item name="name" label="英文名">
-                    <Input disabled={editing} />
-                </Form.Item>
-                <Form.Item name="cname" label="中文名">
+                <Form.Item name="name" label="部门名称">
                     <Input />
                 </Form.Item>
                 <Form.Item name="tel" label="联系电话">
@@ -157,7 +150,7 @@ function DepartmentAddModal({ container = document.body }) {
         ReactDOM.unmountComponentAtNode(container);
     };
     let handleExportCSV = () => {
-        let csv = 'id,部门名称,英文名,联系电话,email\n';
+        let csv = 'id,部门名称,联系电话,email\n';
         let download = document.createElement('a');
         download.href = 'data:text/csv;utf-8,' + csv;
         download.download = '部门表.csv';
@@ -171,8 +164,8 @@ function DepartmentAddModal({ container = document.body }) {
                 header: true,
                 complete: (results) => {
                     let resultsData = results.data.map((result) => {
-                        let { id, 部门名称: cname, 英文名: name, 联系电话: tel, email } = result;
-                        return { id, name, cname, tel, email };
+                        let { id, 部门名称: name, 联系电话: tel, email } = result;
+                        return { id, name, tel, email };
                     });
                     setDataSource(resultsData);
                 },
