@@ -11,6 +11,7 @@ import MenuUnfoldOutlined from '@ant-design/icons/MenuUnfoldOutlined';
 /**
  * 顶部导航布局
  * 适合无前端路由的多页应用
+ * @param {React.Component} 主内容
  */
 function BasicLayout({ children }) {
     return (
@@ -48,6 +49,8 @@ function BasicLayout({ children }) {
 /**
  * 通栏布局
  * 适用于同时需要前端路由和后端路由的情况
+ * @param {React.Component} 侧边栏菜单
+ * @param {React.Component} 主内容
  */
 function BannerLayout({ menu, children }) {
     let [drawerVisible, setDrawerVisible] = React.useState(false);
@@ -77,12 +80,12 @@ function BannerLayout({ menu, children }) {
                     </Col>
                 </Row>
             </Layout.Header>
-            <Layout className="pt-4">
+            <Layout className="pt-4" style={{ minHeight: 'calc(100vh - 64px)' }}>
                 <Row className="d-flex w-100" justify="end">
                     <Col xs={0} lg={6} xl={5} xxl={4}>
                         <Layout.Sider
                             theme="light"
-                            className="position-fixed overflow-auto"
+                            className="position-fixed overflow-auto border-right w-100"
                             width="inherit"
                             style={{ height: 'calc(100vh - 1.5rem - 64px)' }}
                             breakpoint="lg"
@@ -107,7 +110,7 @@ function BannerLayout({ menu, children }) {
                         <Drawer
                             placement="left"
                             visible={drawerVisible}
-                            style={{ top: 'calc(64px + 1.5rem)' }}
+                            style={{ top: 64 }}
                             closable={false}
                             onClose={closeDrawer}
                             bodyStyle={{ padding: 0, width: 'auto' }}

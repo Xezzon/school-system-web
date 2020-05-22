@@ -5,16 +5,18 @@ const webpackCommonConfig = require('./webpack.common.js');
 const webpackDevConfig = {
     // 开发模式。
     mode: 'development',
-    output: { filename: '[name]-[chunkhash].js' },
+    output: { filename: '[name]-[hash].js' },
     devtool: 'inline-source-map',
     plugins: [
         // 抽取CSS
-        new MiniCssExtractPlugin({ filename: '[name]-[chunkhash].min.css' }),
+        new MiniCssExtractPlugin({ filename: '[name]-[hash].min.css' }),
     ],
     // 静态服务器配置
     devServer: {
         host: '0.0.0.0',
         port: '9090',
+        // 模块热替换
+        hot: true,
         // 允许gzip
         compress: true,
         // 动态请求转发
