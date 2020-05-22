@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Modal, Form, Input, Checkbox, Alert } from 'antd';
 import instance from '@/lib/axios';
+import staticModal from '@/hoc/staticModal';
 
 /**
  * 登录对话框
@@ -9,17 +10,9 @@ import instance from '@/lib/axios';
  * 不允许以任何方式手动关掉对话框
  * 登录成功后销毁
  */
-function AuthenticationModal({ rc = document.body }) {
+function AuthenticationModal({ container = document.body }) {
     let [form] = Form.useForm();
     let [authenticationFailed, setAuthenticationFailed] = React.useState();
-
-    React.useEffect(() => {
-        return () => {
-            if (rc) {
-                document.body.removeChild(rc);
-            }
-        };
-    }, []);
 
     let submitForm = () => {
         form.validateFields()
@@ -29,7 +22,7 @@ function AuthenticationModal({ rc = document.body }) {
                     .then(({ data }) => {
                         sessionStorage.setItem('user', data);
                         form.resetFields();
-                        ReactDOM.unmountComponentAtNode(rc);
+                        ReactDOM.unmountComponentAtNode(container);
                     })
                     .catch((error) => {
                         form.resetFields(['cipher']);
@@ -51,7 +44,7 @@ function AuthenticationModal({ rc = document.body }) {
             okText="登录"
             cancelText="取消"
             onOk={submitForm}
-            getContainer={rc}
+            getContainer={container}
         >
             <Form form={form} name="login" initialValues={{ rememberMe: false }}>
                 {!authenticationFailed || <Alert type="error" message={authenticationFailed} />}
@@ -68,11 +61,6 @@ function AuthenticationModal({ rc = document.body }) {
         </Modal>
     );
 }
-
-AuthenticationModal.show = () => {
-    const modalRender = document.createElement('div');
-    document.body.appendChild(modalRender);
-    ReactDOM.render(<AuthenticationModal rc={modalRender} />, modalRender);
-};
+AuthenticationModal = staticModal(AuthenticationModal);
 
 export default AuthenticationModal;
