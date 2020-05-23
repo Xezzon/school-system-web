@@ -138,7 +138,7 @@ function DepartmentEditModal({ data = { id: '', name: '', tel: '', email: '' }, 
             okText="确认"
             cancelText="取消"
         >
-            <Form form={form} initialValues={data}>
+            <Form form={form} initialValues={data} labelCol={{ span: 4 }}>
                 <Form.Item name="name" label="部门名称">
                     <Input />
                 </Form.Item>
