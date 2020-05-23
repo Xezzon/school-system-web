@@ -216,3 +216,4 @@ function DepartmentAddModal({ container = document.body }) {
 DepartmentAddModal = staticModal(DepartmentAddModal);
 
 export default DepartmentPage;
+export { DepartmentTable, DepartmentEditModal, DepartmentAddModal };
