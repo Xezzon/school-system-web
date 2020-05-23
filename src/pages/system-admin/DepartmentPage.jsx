@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Button, Popconfirm, Dropdown, Menu, Input, Modal, Form, Upload } from 'antd';
+import { Table, Button, Popconfirm, Dropdown, Menu, Input, Modal, Form } from 'antd';
 import Papa from 'papaparse';
 import staticModal from '@/hoc/staticModal';
 
@@ -185,6 +185,9 @@ function DepartmentAddModal({ container = document.body }) {
         upload.onchange = () => {
             Papa.parse(upload.files[0], {
                 header: true,
+                skipEmptyLines: true,
+                dynamicTyping: true,
+                encoding: 'UTF-8',
                 complete: (results) => {
                     let resultsData = results.data.map((result) => {
                         let { id, 部门名称: name, 联系电话: tel, email } = result;
