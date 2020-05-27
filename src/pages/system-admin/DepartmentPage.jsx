@@ -33,11 +33,11 @@ function DepartmentPage() {
 
     return (
         <React.Fragment>
-            <div className="table-toolkit clearfix">
-                <div className="table-toolkit-left">
+            <div className="toolkit clearfix">
+                <div className="toolkit-left">
                     <Input.Search></Input.Search>
                 </div>
-                <div className="table-toolkit-right">
+                <div className="toolkit-right">
                     <Dropdown.Button
                         type="primary"
                         trigger={['click']}
@@ -202,9 +202,9 @@ function DepartmentAddModal({ container = document.body }) {
 
     return (
         <Modal title="添加部门" visible={true} getContainer={container} onCancel={handleModalHide} width="80vw">
-            <div className="table-toolkit clearfix">
-                <div className="table-toolkit-left"></div>
-                <div className="table-toolkit-right">
+            <div className="toolkit clearfix">
+                <div className="toolkit-left"></div>
+                <div className="toolkit-right">
                     <Button onClick={handleExportCSV}>导出模板</Button>
                     <Button onClick={handleImportCSV}>从模板中导入</Button>
                 </div>
