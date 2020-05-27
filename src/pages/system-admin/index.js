@@ -7,6 +7,7 @@ import { lazyload } from '@/util/lazyload';
 import style from './index.less';
 
 const DepartmentPage = lazyload(() => import('./DepartmentPage'));
+const CalendarPage = lazyload(() => import('./CalendarPage'));
 
 function SystemAdminSideNav() {
     return (
@@ -31,7 +32,7 @@ function SystemAdminPage() {
                 <Route path="/dashboard" component={React.Fragment} />
                 <Route path="/register" component={React.Fragment} />
                 <Route path="/department" component={DepartmentPage} />
-                <Route path="/calendar" component={React.Fragment} />
+                <Route path="/calendar" component={CalendarPage} />
                 <Redirect exact from="/" to="dashboard" />
             </Switch>
         </Router>
