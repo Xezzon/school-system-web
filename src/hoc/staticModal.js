@@ -1,4 +1,6 @@
 import React from 'react';
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/es/locale/zh_CN';
 
 /**
  * 高阶组件 为对话框添加show静态方法
@@ -14,7 +16,11 @@ const staticModal = (WrappedComponent) => {
             };
         }, []);
 
-        return <WrappedComponent {...props} container={rc} />;
+        return (
+            <ConfigProvider locale={zhCN}>
+                <WrappedComponent {...props} container={rc} />
+            </ConfigProvider>
+        );
     };
     StaticModal.show = (props) => {
         const modalRender = document.createElement('div');
