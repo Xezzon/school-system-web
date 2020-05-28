@@ -19,8 +19,8 @@ function SystemAdminSideNav() {
             }}
         >
             <Menu.Item key="/dashboard">系统运行情况</Menu.Item>
-            <Menu.Item key="/department">部门管理</Menu.Item>
             <Menu.Item key="/register">注册</Menu.Item>
+            <Menu.Item key="/department">部门管理</Menu.Item>
             <Menu.Item key="/calendar">校历</Menu.Item>
         </Menu>
     );
