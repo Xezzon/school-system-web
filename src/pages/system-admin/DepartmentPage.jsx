@@ -43,10 +43,10 @@ function DepartmentPage() {
                         trigger={['click']}
                         overlay={
                             <Menu>
-                                <Menu.Item onClick={DepartmentAddModal.show}>批量添加...</Menu.Item>
+                                <Menu.Item onClick={DepartmentNewModal.show}>批量添加...</Menu.Item>
                             </Menu>
                         }
-                        onClick={DepartmentEditModal.show}
+                        onClick={DepartmentEditorModal.show}
                     >
                         添加...
                     </Dropdown.Button>
@@ -88,7 +88,7 @@ function DepartmentTable({ dataSource, operable }) {
                             <Button
                                 type="link"
                                 onClick={() => {
-                                    DepartmentEditModal.show({ data: record });
+                                    DepartmentEditorModal.show({ data: record });
                                 }}
                             >
                                 编辑
@@ -117,7 +117,7 @@ function DepartmentTable({ dataSource, operable }) {
  * 添加或编辑单个部门的表单对话框
  * @param {{data: {id: string, name: string, tel: string, email: string}}} props
  */
-function DepartmentEditModal({ data = { id: '', name: '', tel: '', email: '' }, container = document.body }) {
+function DepartmentEditorModal({ data = { id: '', name: '', tel: '', email: '' }, container = document.body }) {
     /**
      * 若调用组件时未传入data是添加，否则是编辑
      */
@@ -150,13 +150,13 @@ function DepartmentEditModal({ data = { id: '', name: '', tel: '', email: '' }, 
         </Modal>
     );
 }
-DepartmentEditModal = staticModal(DepartmentEditModal);
+DepartmentEditorModal = staticModal(DepartmentEditorModal);
 
 /**
  * 批量添加部门的表格对话框
  * @param {*} props
  */
-function DepartmentAddModal({ container = document.body }) {
+function DepartmentNewModal({ container = document.body }) {
     let [dataSource, setDataSource] = React.useState();
 
     let handleModalHide = () => {
@@ -211,7 +211,7 @@ function DepartmentAddModal({ container = document.body }) {
         </Modal>
     );
 }
-DepartmentAddModal = staticModal(DepartmentAddModal);
+DepartmentNewModal = staticModal(DepartmentNewModal);
 
 export default DepartmentPage;
-export { DepartmentTable, DepartmentEditModal, DepartmentAddModal };
+export { DepartmentTable, DepartmentEditorModal, DepartmentNewModal };
