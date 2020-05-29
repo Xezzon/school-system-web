@@ -134,6 +134,7 @@ function DepartmentEditorModal({ data = { id: '', name: '', tel: '', email: '' }
             title={editing ? '编辑部门' : '添加部门'}
             visible={true}
             getContainer={container}
+            maskClosable={false}
             onCancel={handleModalHide}
         >
             <Form form={form} initialValues={data} labelCol={{ span: 4 }}>
@@ -199,7 +200,14 @@ function DepartmentNewModal({ container = document.body }) {
     };
 
     return (
-        <Modal title="添加部门" visible={true} getContainer={container} onCancel={handleModalHide} width="80vw">
+        <Modal
+            title="添加部门"
+            visible={true}
+            getContainer={container}
+            onCancel={handleModalHide}
+            maskClosable={false}
+            width="80vw"
+        >
             <div className="toolkit clearfix">
                 <div className="toolkit-left"></div>
                 <div className="toolkit-right">
