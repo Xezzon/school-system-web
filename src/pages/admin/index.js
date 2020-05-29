@@ -7,8 +7,8 @@ import { lazyload } from '@/util/lazyload';
 import zhCN from 'antd/es/locale/zh_CN';
 import './index.less';
 
-const DepartmentPage = lazyload(() => import('./DepartmentPage'));
-const CalendarPage = lazyload(() => import('./CalendarPage'));
+const DepartmentPage = lazyload(() => import('./Department'));
+const CalendarPage = lazyload(() => import('./Calendar'));
 
 function SystemAdminSideNav() {
     return (
