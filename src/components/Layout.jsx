@@ -52,7 +52,7 @@ function BasicLayout({ children }) {
  * @param {React.Component} 侧边栏菜单
  * @param {React.Component} 主内容
  */
-function BannerLayout({ menu, children }) {
+function BannerLayout({ Sider, children }) {
     let [drawerVisible, setDrawerVisible] = React.useState(false);
     let showDrawer = () => {
         setDrawerVisible(true);
@@ -91,7 +91,7 @@ function BannerLayout({ menu, children }) {
                             breakpoint="lg"
                             collapsedWidth={0}
                         >
-                            {menu}
+                            <Sider />
                         </Layout.Sider>
                     </Col>
                     <Col xs={2} lg={0}>
@@ -119,7 +119,7 @@ function BannerLayout({ menu, children }) {
                                 className="overflow-auto"
                                 style={{ width: 'inherit', height: 'calc(100vh - 1.5rem - 64px)' }}
                             >
-                                {menu}
+                                <Sider />
                             </div>
                         </Drawer>
                     </Col>
@@ -137,12 +137,12 @@ function BannerLayout({ menu, children }) {
     );
 }
 
-function SiderLayout({ menu, children }) {
+function SiderLayout({ Sider, children }) {
     return (
         <Layout>
             <Layout.Sider>
                 <div className="logo"></div>
-                {menu}
+                <Sider />
             </Layout.Sider>
             <Layout>
                 <Layout.Header></Layout.Header>

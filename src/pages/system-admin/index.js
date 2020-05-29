@@ -8,7 +8,7 @@ import style from './index.less';
 
 const DepartmentPage = lazyload(() => import('./DepartmentPage'));
 
-function SystemAdminSideNav() {
+function SystemAdminSider() {
     return (
         <Menu
             defaultSelectedKeys={[location.hash.slice(1) || '/dashboard']}
@@ -39,7 +39,7 @@ function SystemAdminPage() {
 }
 
 ReactDOM.render(
-    <Layout menu={<SystemAdminSideNav />} style={style}>
+    <Layout Sider={SystemAdminSider} style={style}>
         <SystemAdminPage />
     </Layout>,
     document.getElementById('rc')
