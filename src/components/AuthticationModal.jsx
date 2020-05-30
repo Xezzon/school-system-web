@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Modal, Form, Input, Checkbox, Alert } from 'antd';
 import instance from '@/lib/axios';
 import staticModal from '@/hoc/staticModal';
+import { Captcha } from '@/components';
 
 /**
  * 登录对话框
@@ -46,13 +47,16 @@ function AuthenticationModal({ container = document.body }) {
             onOk={submitForm}
             getContainer={container}
         >
-            <Form form={form} name="login" initialValues={{ rememberMe: false }}>
+            <Form form={form} name="login" initialValues={{ rememberMe: false }} labelCol={{ span: 4 }}>
                 {!authenticationFailed || <Alert type="error" message={authenticationFailed} />}
                 <Form.Item label="用户名" name="username" rules={[{ required: true, message: '请输入用户名' }]}>
                     <Input />
                 </Form.Item>
                 <Form.Item label="密码" name="cipher" rules={[{ required: true, message: '请输入密码' }]}>
                     <Input.Password />
+                </Form.Item>
+                <Form.Item label="验证码" name="captcha">
+                    <Input suffix={<Captcha />} style={{ paddingRight: 0 }} />
                 </Form.Item>
                 <Form.Item name="rememberMe" valuePropName="checked">
                     <Checkbox>10天内免登录</Checkbox>
