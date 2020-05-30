@@ -2,6 +2,7 @@ import React from 'react';
 import { Table, Button, Popconfirm, Dropdown, Menu, Input, Modal, Form } from 'antd';
 import Papa from 'papaparse';
 import staticModal from '@/hoc/staticModal';
+import { PermissionTransfer } from '@/components';
 
 function DepartmentPage() {
     /* 测试数据START */
@@ -84,7 +85,6 @@ function DepartmentTable({ dataSource, operable }) {
                     key="handlers"
                     render={(text, record) => (
                         <React.Fragment>
-                            <Button type="link">设置管理员</Button>
                             <Button
                                 type="link"
                                 onClick={() => {
@@ -92,6 +92,9 @@ function DepartmentTable({ dataSource, operable }) {
                                 }}
                             >
                                 编辑
+                            </Button>
+                            <Button type="link" onClick={PermissionAssignmentModal.show}>
+                                分配权限
                             </Button>
                             <Popconfirm
                                 title="确认删除？"
@@ -206,7 +209,7 @@ function DepartmentNewModal({ container = document.body }) {
             getContainer={container}
             onCancel={handleModalHide}
             maskClosable={false}
-            width="80vw"
+            style={{ minWidth: '60vw' }}
         >
             <div className="toolkit clearfix">
                 <div className="toolkit-left"></div>
@@ -220,6 +223,38 @@ function DepartmentNewModal({ container = document.body }) {
     );
 }
 DepartmentNewModal = staticModal(DepartmentNewModal);
+
+function PermissionAssignmentModal({ container = document.body }) {
+    let [form] = Form.useForm();
+
+    let handleHide = () => {
+        ReactDOM.unmountComponentAtNode(container);
+    };
+
+    return (
+        <Modal
+            title="权限分配"
+            visible={true}
+            getContainer={container}
+            onCancel={handleHide}
+            maskClosable={false}
+            style={{ minWidth: '50vw' }}
+        >
+            <Form form={form} layout="inline">
+                <Form.Item name="admin.username" label="负责人账号">
+                    <Input />
+                </Form.Item>
+                <Form.Item name="admin.name" label="负责人名字">
+                    <Input disabled />
+                </Form.Item>
+                <Form.Item name="permission" label="部门权限">
+                    <PermissionTransfer />
+                </Form.Item>
+            </Form>
+        </Modal>
+    );
+}
+PermissionAssignmentModal = staticModal(PermissionAssignmentModal);
 
 export default DepartmentPage;
 export { DepartmentTable, DepartmentEditorModal, DepartmentNewModal };
