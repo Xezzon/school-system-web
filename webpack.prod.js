@@ -20,6 +20,10 @@ function JsdeliverCdn(moduleName, version, options) {
             var: 'Papa',
             path: 'papaparse.min.js',
         },
+        'opentype.js': {
+            var: 'opentype',
+            path: 'dist/opentype.min.js',
+        },
     };
 
     if (typeof moduleName !== 'string') {
