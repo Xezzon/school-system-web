@@ -4,6 +4,7 @@ import { Modal, Form, Input, Checkbox, Alert } from 'antd';
 import instance from '@/lib/axios';
 import staticModal from '@/hoc/staticModal';
 import { Captcha } from '@/components';
+import { HmacSHA1 } from 'crypto-js';
 
 /**
  * 登录对话框
@@ -18,6 +19,8 @@ function AuthenticationModal({ container = document.body }) {
     let submitForm = () => {
         form.validateFields()
             .then((values) => {
+                values.timestamp = new Date().getTime();
+                values.checkcode = HmacSHA1(values.captcha, values.timestamp.toString()).toString();
                 instance
                     .post('/passport/login', values)
                     .then(({ data }) => {
