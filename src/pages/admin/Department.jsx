@@ -1,7 +1,8 @@
 import React from 'react';
-import { Table, Button, Popconfirm, Dropdown, Menu, Input, Modal, Form, Upload } from 'antd';
+import { Table, Button, Popconfirm, Dropdown, Menu, Input, Modal, Form } from 'antd';
 import Papa from 'papaparse';
 import staticModal from '@/hoc/staticModal';
+import { PermissionTransfer } from '@/components';
 
 function DepartmentPage() {
     /* 测试数据START */
@@ -33,20 +34,20 @@ function DepartmentPage() {
 
     return (
         <React.Fragment>
-            <div className="table-toolkit clearfix">
-                <div className="table-toolkit-left">
+            <div className="toolkit clearfix">
+                <div className="toolkit-left">
                     <Input.Search></Input.Search>
                 </div>
-                <div className="table-toolkit-right">
+                <div className="toolkit-right">
                     <Dropdown.Button
                         type="primary"
                         trigger={['click']}
                         overlay={
                             <Menu>
-                                <Menu.Item onClick={DepartmentAddModal.show}>批量添加...</Menu.Item>
+                                <Menu.Item onClick={DepartmentNewModal.show}>批量添加...</Menu.Item>
                             </Menu>
                         }
-                        onClick={DepartmentEditModal.show}
+                        onClick={DepartmentEditorModal.show}
                     >
                         添加...
                     </Dropdown.Button>
@@ -84,14 +85,16 @@ function DepartmentTable({ dataSource, operable }) {
                     key="handlers"
                     render={(text, record) => (
                         <React.Fragment>
-                            <Button type="link">设置管理员</Button>
                             <Button
                                 type="link"
                                 onClick={() => {
-                                    DepartmentEditModal.show({ data: record });
+                                    DepartmentEditorModal.show({ data: record });
                                 }}
                             >
                                 编辑
+                            </Button>
+                            <Button type="link" onClick={PermissionAssignmentModal.show}>
+                                分配权限
                             </Button>
                             <Popconfirm
                                 title="确认删除？"
@@ -117,7 +120,7 @@ function DepartmentTable({ dataSource, operable }) {
  * 添加或编辑单个部门的表单对话框
  * @param {{data: {id: string, name: string, tel: string, email: string}}} props
  */
-function DepartmentEditModal({ data = { id: '', name: '', tel: '', email: '' }, container = document.body }) {
+function DepartmentEditorModal({ data = { id: '', name: '', tel: '', email: '' }, container = document.body }) {
     /**
      * 若调用组件时未传入data是添加，否则是编辑
      */
@@ -134,11 +137,10 @@ function DepartmentEditModal({ data = { id: '', name: '', tel: '', email: '' }, 
             title={editing ? '编辑部门' : '添加部门'}
             visible={true}
             getContainer={container}
+            maskClosable={false}
             onCancel={handleModalHide}
-            okText="确认"
-            cancelText="取消"
         >
-            <Form form={form} initialValues={data}>
+            <Form form={form} initialValues={data} labelCol={{ span: 4 }}>
                 <Form.Item name="name" label="部门名称">
                     <Input />
                 </Form.Item>
@@ -152,13 +154,13 @@ function DepartmentEditModal({ data = { id: '', name: '', tel: '', email: '' }, 
         </Modal>
     );
 }
-DepartmentEditModal = staticModal(DepartmentEditModal);
+DepartmentEditorModal = staticModal(DepartmentEditorModal);
 
 /**
  * 批量添加部门的表格对话框
  * @param {*} props
  */
-function DepartmentAddModal({ container = document.body }) {
+function DepartmentNewModal({ container = document.body }) {
     let [dataSource, setDataSource] = React.useState();
 
     let handleModalHide = () => {
@@ -185,6 +187,9 @@ function DepartmentAddModal({ container = document.body }) {
         upload.onchange = () => {
             Papa.parse(upload.files[0], {
                 header: true,
+                skipEmptyLines: true,
+                dynamicTyping: true,
+                encoding: 'UTF-8',
                 complete: (results) => {
                     let resultsData = results.data.map((result) => {
                         let { id, 部门名称: name, 联系电话: tel, email } = result;
@@ -198,10 +203,17 @@ function DepartmentAddModal({ container = document.body }) {
     };
 
     return (
-        <Modal title="添加部门" visible={true} getContainer={container} onCancel={handleModalHide} width="80vw">
-            <div className="table-toolkit clearfix">
-                <div className="table-toolkit-left"></div>
-                <div className="table-toolkit-right">
+        <Modal
+            title="添加部门"
+            visible={true}
+            getContainer={container}
+            onCancel={handleModalHide}
+            maskClosable={false}
+            style={{ minWidth: '60vw' }}
+        >
+            <div className="toolkit clearfix">
+                <div className="toolkit-left"></div>
+                <div className="toolkit-right">
                     <Button onClick={handleExportCSV}>导出模板</Button>
                     <Button onClick={handleImportCSV}>从模板中导入</Button>
                 </div>
@@ -210,6 +222,39 @@ function DepartmentAddModal({ container = document.body }) {
         </Modal>
     );
 }
-DepartmentAddModal = staticModal(DepartmentAddModal);
+DepartmentNewModal = staticModal(DepartmentNewModal);
+
+function PermissionAssignmentModal({ container = document.body }) {
+    let [form] = Form.useForm();
+
+    let handleHide = () => {
+        ReactDOM.unmountComponentAtNode(container);
+    };
+
+    return (
+        <Modal
+            title="权限分配"
+            visible={true}
+            getContainer={container}
+            onCancel={handleHide}
+            maskClosable={false}
+            style={{ minWidth: '50vw' }}
+        >
+            <Form form={form} layout="inline">
+                <Form.Item name="admin.username" label="负责人账号">
+                    <Input />
+                </Form.Item>
+                <Form.Item name="admin.name" label="负责人名字">
+                    <Input disabled />
+                </Form.Item>
+                <Form.Item name="permission" label="部门权限">
+                    <PermissionTransfer />
+                </Form.Item>
+            </Form>
+        </Modal>
+    );
+}
+PermissionAssignmentModal = staticModal(PermissionAssignmentModal);
 
 export default DepartmentPage;
+export { DepartmentTable, DepartmentEditorModal, DepartmentNewModal };

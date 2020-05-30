@@ -9,7 +9,7 @@ const resolve = (relativePath) => path.resolve(__dirname, relativePath);
 const webpackCommonConfig = {
     entry: {
         index: '@/pages/index',
-        'system-admin': '@/pages/system-admin',
+        admin: '@/pages/admin',
     },
     output: { path: resolve('./dist') },
     resolve: {
@@ -56,7 +56,7 @@ const webpackCommonConfig = {
         // 打包HTML并注入CSS、JS
         ...[
             { chunk: 'index', title: '导航页' },
-            { chunk: 'system-admin', title: '系统管理员' },
+            { chunk: 'admin', title: '管理员页面' },
         ].map(
             ({ chunk, ...options }) =>
                 new HtmlWebpackPlugin({
