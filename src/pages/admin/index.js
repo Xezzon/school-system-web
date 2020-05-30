@@ -10,7 +10,7 @@ import './index.less';
 const DepartmentPage = lazyload(() => import('./Department'));
 const CalendarPage = lazyload(() => import('./Calendar'));
 
-function SystemAdminSideNav() {
+function SystemAdminSider() {
     return (
         <Menu
             defaultSelectedKeys={[location.hash.slice(1) || '/dashboard']}
@@ -41,7 +41,7 @@ function SystemAdminPage() {
 }
 
 ReactDOM.render(
-    <Layout menu={<SystemAdminSideNav />}>
+    <Layout Sider={SystemAdminSider}>
         <ConfigProvider locale={zhCN}>
             <SystemAdminPage />
         </ConfigProvider>
