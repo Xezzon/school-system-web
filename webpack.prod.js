@@ -7,8 +7,8 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const merge = require('webpack-merge');
 const webpackCommonConfig = require('./webpack.common.js');
-const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
-const smp = new SpeedMeasurePlugin();
+// const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
+// const smp = new SpeedMeasurePlugin();
 
 function JsdeliverCdn(moduleName, version, options) {
     let cdn = {
@@ -82,4 +82,5 @@ const webpackProdConfig = {
     ],
 };
 
-module.exports = smp.wrap(merge(webpackCommonConfig, webpackProdConfig));
+// module.exports = smp.wrap(merge(webpackCommonConfig, webpackProdConfig));
+module.exports = merge(webpackCommonConfig, webpackProdConfig);
