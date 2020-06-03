@@ -75,12 +75,6 @@ const webpackCommonConfig = {
         ]),
         new AntdDayjsWebpackPlugin(),
     ],
-    externals: {
-        axios: 'axios',
-        react: 'React',
-        'react-dom': 'ReactDOM',
-        'react-router-dom': 'ReactRouterDOM',
-    },
 };
 
 module.exports = webpackCommonConfig;

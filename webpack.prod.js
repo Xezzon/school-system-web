@@ -1,6 +1,6 @@
 const OptimizeCSSAssertsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
+const WebpackCDNPlugin = require('webpack-cdn-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -9,40 +9,6 @@ const merge = require('webpack-merge');
 const webpackCommonConfig = require('./webpack.common.js');
 // const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
 // const smp = new SpeedMeasurePlugin();
-
-function JsdeliverCdn(moduleName, version, options) {
-    let cdn = {
-        axios: {
-            var: 'axios',
-            path: 'dist/axios.min.js',
-        },
-        papaparse: {
-            var: 'Papa',
-            path: 'papaparse.min.js',
-        },
-        'opentype.js': {
-            var: 'opentype',
-            path: 'dist/opentype.min.js',
-        },
-    };
-
-    if (typeof moduleName !== 'string') {
-        throw new TypeError("Expected 'moduleName' to be a string");
-    }
-    if (typeof version !== 'string') {
-        throw new TypeError("Expected 'version' to be a string");
-    }
-    if (!(moduleName in cdn)) {
-        return null;
-    }
-
-    return {
-        name: moduleName,
-        var: cdn[moduleName].var,
-        url: `//cdn.jsdelivr.net/npm/${moduleName}@${version}/${cdn[moduleName].path}`,
-        version,
-    };
-}
 
 const webpackProdConfig = {
     // 生产模式。默认开启 Optimization.minimize、HtmlWebpackPlugin.minify
@@ -65,7 +31,19 @@ const webpackProdConfig = {
         // 清理之前的打包结果
         new CleanWebpackPlugin(),
         // 将部分包替换为CDN
-        new CdnWebpackPlugin({ resolver: JsdeliverCdn }),
+        new WebpackCDNPlugin({
+            prodUrl: '//cdn.jsdelivr.net/npm/:name@:version/:path',
+            modules: [
+                { name: 'antd', style: 'dist/antd.min.css', cssOnly: true },
+                { name: 'axios', var: 'axios', path: 'dist/axios.min.js' },
+                { name: 'opentype.js', var: 'opentype', path: 'dist/opentype.min.js' },
+                { name: 'papaparse', var: 'Papa', path: 'papaparse.min.js' },
+                { name: 'react', var: 'React', path: 'umd/react.production.min.js' },
+                { name: 'react-dom', var: 'ReactDOM', path: 'umd/react-dom.production.min.js' },
+                { name: 'react-router-dom', var: 'ReactRouterDOM', path: 'umd/react-router-dom.production.min.js' },
+            ],
+            optimize: true,
+        }),
         // 抽取CSS
         new MiniCssExtractPlugin({ filename: '[chunkhash:8].min.css' }),
         // gzip压缩

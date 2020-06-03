@@ -1,6 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const merge = require('webpack-merge');
 const webpackCommonConfig = require('./webpack.common.js');
+const WebpackCDNPlugin = require('webpack-cdn-plugin');
 
 const webpackDevConfig = {
     // 开发模式。
@@ -10,6 +11,11 @@ const webpackDevConfig = {
     plugins: [
         // 抽取CSS
         new MiniCssExtractPlugin({ filename: '[name]-[hash].min.css' }),
+        new WebpackCDNPlugin({
+            modules: [{ name: 'antd', style: 'dist/antd.css', cssOnly: true }],
+            prod: false,
+            publicPath: '/node_modules',
+        }),
     ],
     // 静态服务器配置
     devServer: {
