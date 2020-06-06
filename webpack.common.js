@@ -23,12 +23,12 @@ const webpackCommonConfig = {
             {
                 test: /\.js[x]?$/,
                 use: ['thread-loader', 'babel-loader?cacheDirectory=true'],
-                exclude: /node_modules/,
+                exclude: /[\\/]node_modules[\\/]/,
             },
             {
                 test: /\.(le|c)ss$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
-                exclude: /node_modules/,
+                exclude: /[\\/]node_modules[\\/]/,
             },
         ],
     },
@@ -39,9 +39,17 @@ const webpackCommonConfig = {
                 vendor: {
                     priority: 1,
                     name: 'vendor',
-                    test: /node_modules/,
+                    test: /[\\/]node_modules[\\/]/,
                     chunks: 'initial',
                     minChunks: 1,
+                    reuseExistingChunk: true,
+                },
+                // antd 过大，单独打包
+                antd: {
+                    test: /(antd)/,
+                    name: 'antd',
+                    chunks: 'all',
+                    priority: 5,
                 },
                 // 抽取公共代码
                 common: {
