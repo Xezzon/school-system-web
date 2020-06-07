@@ -21,7 +21,7 @@ const webpackProdConfig = {
             // 压缩JS
             new TerserPlugin({
                 test: /\.js[x]?$/,
-                exclude: /node_module/,
+                exclude: /[\\/]node_module[\\/]/,
                 parallel: true,
                 terserOptions: { compress: { pure_funcs: ['console.debug'] } },
             }),
@@ -40,7 +40,7 @@ const webpackProdConfig = {
                 { name: 'papaparse', var: 'Papa', path: 'papaparse.min.js' },
                 { name: 'react', var: 'React', path: 'umd/react.production.min.js' },
                 { name: 'react-dom', var: 'ReactDOM', path: 'umd/react-dom.production.min.js' },
-                { name: 'react-router-dom', var: 'ReactRouterDOM', path: 'umd/react-router-dom.production.min.js' },
+                { name: 'react-router-dom', var: 'ReactRouterDOM', path: 'umd/react-router-dom.min.js' },
             ],
             optimize: true,
         }),
@@ -50,7 +50,7 @@ const webpackProdConfig = {
         new CompressionPlugin({
             algorithm: 'gzip',
             test: /\.(js|css)$/,
-            exclude: /node_module/,
+            exclude: /[\\/]node_module[\\/]/,
         }),
         new BundleAnalyzerPlugin({
             analyzerMode: 'static',
