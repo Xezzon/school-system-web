@@ -21,7 +21,7 @@ const webpackProdConfig = {
             // 压缩JS
             new TerserPlugin({
                 test: /\.js[x]?$/,
-                exclude: /[\\/]node_module[\\/]/,
+                exclude: /[\\/]node_modules[\\/]/,
                 parallel: true,
                 terserOptions: { compress: { pure_funcs: ['console.debug'] } },
             }),
@@ -51,7 +51,7 @@ const webpackProdConfig = {
         new CompressionPlugin({
             algorithm: 'gzip',
             test: /\.(js|css)$/,
-            exclude: /[\\/]node_module[\\/]/,
+            exclude: /[\\/]node_modules[\\/]/,
         }),
         new BundleAnalyzerPlugin({
             analyzerMode: 'static',
