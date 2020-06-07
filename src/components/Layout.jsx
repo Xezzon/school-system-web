@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Dropdown, Menu, Button, Row, Col, Card, Affix, Drawer } from 'antd';
+import { Layout, Dropdown, Menu, Button, Row, Col, Card, Drawer } from 'antd';
 import ArrowUpOutlined from '@ant-design/icons/ArrowUpOutlined';
 import ArrowDownOutlined from '@ant-design/icons/ArrowDownOutlined';
 import UnorderedListOutlined from '@ant-design/icons/UnorderedListOutlined';

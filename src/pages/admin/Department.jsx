@@ -65,7 +65,7 @@ function DepartmentPage() {
 function DepartmentTable({ dataSource, operable }) {
     let [page, setPage] = React.useState({ current: 1, pageSize: 15 });
 
-    let handleTableChange = (pagination, filter, sorter) => {
+    let handleTableChange = (pagination) => {
         setPage({ ...page, current: pagination.current });
     };
 

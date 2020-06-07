@@ -1,5 +1,5 @@
 import React from 'react';
-const opentype = require('opentype.js');
+import { load as loadfont } from 'opentype.js';
 
 const randint = (a = 1, b = 0) => Math.floor(Math.random() * a + b);
 
@@ -32,7 +32,7 @@ function CaptchaSVG({ code, width, height }) {
     React.useEffect(() => {
         async function _draw() {
             if (font == null) {
-                await opentype.load(
+                await loadfont(
                     '//raw.staticdn.net/google/fonts/master/apache/robotomono/RobotoMono-Italic.ttf',
                     (err, f) => {
                         if (err) {
