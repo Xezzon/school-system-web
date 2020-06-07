@@ -1,10 +1,12 @@
 import React from 'react';
 import { Layout, Dropdown, Menu, Button, Row, Col, Card, Drawer } from 'antd';
-import ArrowUpOutlined from '@ant-design/icons/ArrowUpOutlined';
-import ArrowDownOutlined from '@ant-design/icons/ArrowDownOutlined';
-import UnorderedListOutlined from '@ant-design/icons/UnorderedListOutlined';
-import DownOutLined from '@ant-design/icons/DownOutlined';
-import MenuUnfoldOutlined from '@ant-design/icons/MenuUnfoldOutlined';
+import {
+    ArrowUpOutlined,
+    ArrowDownOutlined,
+    UnorderedListOutlined,
+    DownOutlined,
+    MenuUnfoldOutlined,
+} from '@ant-design/icons';
 
 // TODO: 目前的布局冗余很大
 
@@ -223,7 +225,7 @@ function Header({ collapse }) {
                             }
                         >
                             <a>
-                                nav5 <DownOutLined />
+                                nav5 <DownOutlined />
                             </a>
                         </Dropdown>
                     </Menu.Item>
