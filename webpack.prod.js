@@ -31,6 +31,7 @@ const webpackProdConfig = {
         // 清理之前的打包结果
         new CleanWebpackPlugin(),
         // 将部分包替换为CDN
+        /* BUG: 因为HtmlWebpackPlugin未提供每个页面的chunks，所以不能根据chunks注入CDN，导致所有页面被注入的CDN都是一样的 */
         new WebpackCDNPlugin({
             prodUrl: '//cdn.jsdelivr.net/npm/:name@:version/:path',
             modules: [
