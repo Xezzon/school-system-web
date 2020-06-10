@@ -3,7 +3,13 @@ import { load as loadfont } from 'opentype.js';
 
 const randint = (a = 1, b = 0) => Math.floor(Math.random() * a + b);
 
-function Captcha({ width = 114, height = 32, codeLength = 4, strength = 3 }) {
+function Captcha({ width = 114, height = 32, codeLength = 4, strength = 3 }, ref) {
+    React.useImperativeHandle(ref, () => ({
+        click: () => ref.current.handleClick(),
+        validate: (value) => code === value,
+        code: code,
+    }));
+
     let [code, setCode] = React.useState([]);
     let [clicked, setClicked] = React.useState(0);
 
