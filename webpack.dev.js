@@ -25,6 +25,9 @@ const webpackDevConfig = {
             publicPath: '/node_modules',
         }),
     ],
+    watchOptions: {
+        ignored: /node_modules/,
+    },
     // 静态服务器配置
     devServer: {
         host: '0.0.0.0',
