@@ -7,6 +7,7 @@
     "license": "Apache-2.0",
     "sideEffects": ["dist/*", "*.less"],
     "scripts": {
+        "docker:build": "docker build -t school-system-web:$npm_package_version .",
         "lint": "npm run lint:style && npm run lint:script",
         "lint:style": "node_modules/.bin/stylelint 'src/**/*.less' --syntax less",
         "lint:script": "node_modules/.bin/eslint src --ext '.js,.jsx'",
