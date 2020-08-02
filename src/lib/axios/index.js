@@ -1,5 +1,4 @@
 import Axios from 'axios';
-import { makeUseAxios } from 'axios-hooks';
 import { AuthenticationModal } from '@/components';
 
 const instance = Axios.create();
@@ -26,7 +25,5 @@ instance.interceptors.response.use(
 
 const requestMethod = { GET: 'get', POST: 'post', PUT: 'put', DELETE: 'delete' };
 
-const useAxios = makeUseAxios(instance);
-
 export default instance;
-export { useAxios, requestMethod };
+export { requestMethod };
