@@ -74,13 +74,14 @@ const webpackCommonConfig = {
                     ...options,
                 })
         ),
-        new CopyWebpackPlugin([
-            {
-                from: resolve('./src/resources'),
-                to: 'static',
-                cache: true,
-            },
-        ]),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: resolve('./src/resources'),
+                    to: 'static',
+                },
+            ],
+        }),
         new AntdDayjsWebpackPlugin(),
     ],
 };
