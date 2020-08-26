@@ -37,8 +37,6 @@ const webpackProdConfig = {
             modules: [
                 { name: 'antd', style: 'dist/antd.min.css', cssOnly: true },
                 { name: 'axios', var: 'axios', path: 'dist/axios.min.js' },
-                { name: 'opentype.js', var: 'opentype', path: 'dist/opentype.min.js' },
-                { name: 'papaparse', var: 'Papa', path: 'papaparse.min.js' },
                 { name: 'react', var: 'React', path: 'umd/react.production.min.js' },
                 { name: 'react-dom', var: 'ReactDOM', path: 'umd/react-dom.production.min.js' },
                 { name: 'react-router-dom', var: 'ReactRouterDOM', path: 'umd/react-router-dom.min.js' },

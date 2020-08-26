@@ -15,8 +15,6 @@ const webpackDevConfig = {
             modules: [
                 { name: 'antd', style: 'dist/antd.css', cssOnly: true },
                 { name: 'axios', var: 'axios', path: 'dist/axios.js' },
-                { name: 'opentype.js', var: 'opentype', path: 'dist/opentype.js' },
-                { name: 'papaparse', var: 'Papa', path: 'papaparse.js' },
                 { name: 'react', var: 'React', path: 'umd/react.development.js' },
                 { name: 'react-dom', var: 'ReactDOM', path: 'umd/react-dom.development.js' },
                 { name: 'react-router-dom', var: 'ReactRouterDOM', path: 'umd/react-router-dom.js' },
