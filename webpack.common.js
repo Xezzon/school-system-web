@@ -15,6 +15,8 @@ const webpackCommonConfig = {
     resolve: {
         alias: {
             '@': resolve('./src'),
+            // 减少重复打包
+            'bn.js': path.resolve(process.cwd(), 'node_modules', 'bn.js'),
         },
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', 'wasm'],
     },
