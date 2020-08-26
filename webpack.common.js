@@ -36,28 +36,23 @@ const webpackCommonConfig = {
     },
     optimization: {
         splitChunks: {
+            chunks: 'all',
+            minSize: 20000,
+            maxSize: 0,
+            minChunks: 1,
+            maxAsyncRequests: 30,
+            maxInitialRequests: 30,
+            automaticNameDelimiter: '~',
+            enforceSizeThreshold: 50000,
             cacheGroups: {
-                // 第三方依赖
-                vendor: {
-                    priority: 1,
-                    name: 'vendor',
+                defaultVendors: {
                     test: /[\\/]node_modules[\\/]/,
-                    chunks: 'initial',
-                    minChunks: 1,
+                    priority: -10,
+                },
+                default: {
+                    minChunks: 2,
+                    priority: -20,
                     reuseExistingChunk: true,
-                },
-                // antd 过大，单独打包
-                antd: {
-                    test: /(antd)/,
-                    name: 'antd',
-                    chunks: 'all',
-                    priority: 5,
-                },
-                // 抽取公共代码
-                common: {
-                    chunks: 'initial',
-                    name: 'common',
-                    minChunks: 3,
                 },
             },
         },
