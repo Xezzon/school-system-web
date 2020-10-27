@@ -12,14 +12,15 @@
     "scripts": {
         "docker:build": "docker build -t school-system-web:$npm_package_version .",
         "lint": "npm run lint:style && npm run lint:script",
-        "lint:style": "node_modules/.bin/stylelint 'src/**/*.less' --syntax less",
-        "lint:script": "node_modules/.bin/eslint src --ext '.js,.jsx'",
+        "lint:style": "npx stylelint 'src/**/*.less' --syntax less",
+        "lint:script": "npx eslint src --ext '.js,.jsx'",
         "lint-fix": "npm run lint-fix:style && npm run lint-fix:script",
         "lint-fix:style": "npm run lint:style -- --fix",
         "lint-fix:script": "npm run lint:script -- --fix",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "webpack:build": "node_modules/.bin/webpack --config webpack.prod.js --progress",
-        "webpack:watch": "node_modules/.bin/webpack serve --config webpack.dev.js"
+        "webpack:analyze": "npx webpack --mode production --profile --analyze --no-stats",
+        "webpack:build": "npx webpack --mode production --progress",
+        "webpack:watch": "npx webpack serve --mode development"
     },
     "dependencies": {
         "antd": "^4.7.3",
@@ -54,16 +55,16 @@
         "html-webpack-plugin": "^4.5.0",
         "less": "^3.12.2",
         "less-loader": "^7.0.2",
-        "mini-css-extract-plugin": "^1.2.0",
+        "mini-css-extract-plugin": "^1.2.1",
         "stylelint": "^13.7.2",
         "stylelint-config-recommended": "^3.0.0",
-        "terser-webpack-plugin": "^5.0.1",
-        "thread-loader": "^3.0.0",
-        "webpack": "^5.2.0",
+        "terser-webpack-plugin": "^5.0.3",
+        "thread-loader": "^3.0.1",
+        "webpack": "^5.3.2",
         "webpack-bundle-analyzer": "^3.9.0",
         "webpack-cdn-plugin": "^3.3.1",
         "webpack-cli": "^4.1.0",
         "webpack-dev-server": "^3.11.0",
-        "webpack-merge": "^5.2.0"
+        "webpack-merge": "^5.3.0"
     }
 }

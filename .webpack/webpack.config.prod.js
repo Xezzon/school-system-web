@@ -4,11 +4,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { merge } = require('webpack-merge');
-const webpackCommonConfig = require('./webpack.common.js');
-// const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
-// const smp = new SpeedMeasurePlugin();
+const webpackCommonConfig = require('./webpack.config.js');
 
 const webpackProdConfig = {
     // 生产模式。默认开启 Optimization.minimize、HtmlWebpackPlugin.minify
@@ -51,13 +48,7 @@ const webpackProdConfig = {
             test: /\.(js|css)$/,
             exclude: /[\\/]node_modules[\\/]/,
         }),
-        new BundleAnalyzerPlugin({
-            analyzerMode: 'static',
-            generateStatsFile: true,
-            openAnalyzer: false,
-        }),
     ],
 };
 
-// module.exports = smp.wrap(merge(webpackCommonConfig, webpackProdConfig));
 module.exports = merge(webpackCommonConfig, webpackProdConfig);
