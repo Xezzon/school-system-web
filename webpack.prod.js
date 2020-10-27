@@ -1,10 +1,10 @@
-const OptimizeCSSAssertsPlugin = require('optimize-css-assets-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const WebpackCDNPlugin = require('webpack-cdn-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { merge } = require('webpack-merge');
 const webpackCommonConfig = require('./webpack.common.js');
 // const SpeedMeasurePlugin = require('speed-measure-webpack-plugin');
@@ -17,7 +17,7 @@ const webpackProdConfig = {
     optimization: {
         minimizer: [
             // 压缩CSS
-            new OptimizeCSSAssertsPlugin(),
+            new CssMinimizerWebpackPlugin(),
             // 压缩JS
             new TerserPlugin({
                 test: /\.js[x]?$/,
