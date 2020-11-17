@@ -18,8 +18,8 @@
         "lint-fix:style": "npm run lint:style -- --fix",
         "lint-fix:script": "npm run lint:script -- --fix",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "webpack:analyze": "npx webpack --mode production --profile --analyze --no-stats",
-        "webpack:build": "npx webpack --mode production --progress",
+        "webpack:analyze": "npx webpack --mode production --progress=profile --analyze --no-stats",
+        "webpack:build": "npx webpack --mode production",
         "webpack:watch": "npx webpack serve --mode development"
     },
     "dependencies": {
