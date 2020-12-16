@@ -25,7 +25,8 @@
         // 有些地方使用了ReactDOM但在当前文件未定义，因为不影响使用，所以禁用该项
         "jsx-control-statements/jsx-jcs-no-undef": 0,
         // no-func-assign禁止对function声明从重新赋值，为了对函数组件使用高阶组件，禁用此项
-        "no-func-assign": "off"
+        "no-func-assign": "off",
+        "react/react-in-jsx-scope"
         /* AlloyTeamGuideCode START see: https://alloyteam.github.io/CodeGuide/ */
         /* AlloyTeamGuideCode END */
     },
