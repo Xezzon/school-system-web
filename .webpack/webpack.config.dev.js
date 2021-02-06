@@ -6,11 +6,11 @@ const WebpackCDNPlugin = require('webpack-cdn-plugin');
 const webpackDevConfig = {
     // 开发模式。
     mode: 'development',
-    output: { filename: '[name]-[hash].js' },
+    output: { filename: '[name]-[fullhash].js' },
     devtool: 'inline-source-map',
     plugins: [
         // 抽取CSS
-        new MiniCssExtractPlugin({ filename: '[name]-[hash].min.css' }),
+        new MiniCssExtractPlugin({ filename: '[name]-[fullhash].min.css' }),
         new WebpackCDNPlugin({
             modules: [
                 { name: 'antd', style: 'dist/antd.css', cssOnly: true },
