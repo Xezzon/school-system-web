@@ -48,6 +48,11 @@ function CourseTable() {
             render: ({ id, name }) => <a _href={id}>{name}</a>,
         },
         {
+            title: '选课人数',
+            key: 'population',
+            render: ({ population, containment }) => `${population || 0} / ${containment || 0}`,
+        },
+        {
             title: '操作',
             key: 'handler',
             render: (value, record) => (
