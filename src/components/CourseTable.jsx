@@ -53,6 +53,34 @@ function CourseTable() {
             render: ({ population, containment }) => `${population || 0} / ${containment || 0}`,
         },
         {
+            title: '课程安排',
+            dataIndex: 'schedules',
+            className: 'text-prewrap',
+            render: (data) => {
+                const abWeekMap = new Map([
+                    [0, ''],
+                    [1, '(单)'],
+                    [2, '(双)'],
+                ]);
+                const wkMap = new Map([
+                    [1, '一'],
+                    [2, '二'],
+                    [3, '三'],
+                    [4, '四'],
+                    [5, '五'],
+                    [6, '六'],
+                    [7, '日'],
+                ]);
+                return data
+                    .map(({ startWeek, endWeek, abWeek, wk, tempo, classhour, building, doorplate }) => {
+                        return `第${startWeek}~${endWeek}周${abWeekMap.get(abWeek)}${wkMap.get(wk)} ${tempo}~${
+                            tempo + classhour
+                        } ${building} ${doorplate}`;
+                    })
+                    .join('\n');
+            },
+        },
+        {
             title: '操作',
             key: 'handler',
             render: (value, record) => (
