@@ -1,10 +1,9 @@
 import { CheckCircleTwoTone } from '@ant-design/icons';
 import { Badge, Card } from 'antd';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-function CheckedCard({ checked: checkedProp = false, className, children, style, ...restProps }, ref) {
+function CheckedCard({ checked: checkedProp = false, className, children, style, onChange, ...restProps }) {
     let [checked, setChecked] = useState(false);
-    let inputRef = useRef();
     console.debug(1);
 
     useEffect(() => {
@@ -12,32 +11,21 @@ function CheckedCard({ checked: checkedProp = false, className, children, style,
         setChecked(checkedProp);
     }, [checkedProp]);
 
-    let change = (e) => {
-        let newChecked = e.target.checked;
-        restProps.onChange ? restProps.onChange(newChecked) : setChecked(newChecked);
-    };
-
-    let onClick = () => {
-        inputRef.current.click();
+    let change = () => {
+        onChange ? onChange(!checked) : setChecked(!checked);
     };
 
     return (
-        <>
-            <input
-                type="checkbox"
-                name={restProps.name}
-                checked={checked}
-                className="d-none"
-                readOnly
-                onChange={change}
-                ref={inputRef}
-            />
-            <Badge count={<CheckCircleTwoTone className={checked || 'invisible'} />}>
-                <Card hoverable style={checked ? { border: '1px solid #1890FF' } : {}} onClick={onClick}>
-                    {children}
-                </Card>
-            </Badge>
-        </>
+        <Badge count={<CheckCircleTwoTone className={checked || 'invisible'} />} className={className}>
+            <Card
+                hoverable
+                style={checked ? { border: '1px solid #1890FF', ...style } : { ...style }}
+                onClick={change}
+                {...restProps}
+            >
+                {children}
+            </Card>
+        </Badge>
     );
 }
 
