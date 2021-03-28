@@ -1,10 +1,11 @@
-import { Fragment, useEffect, useState } from 'react';
+import CheckedCard from '@/components/CheckedCard';
 import axios from '@/services/axios';
-import { Card, Checkbox, Divider, List } from 'antd';
+import { Button, Divider, Form, List } from 'antd';
+import { useEffect, useState } from 'react';
 
 function TeachingPlanBuilding() {
     let [klasos, setKlasos] = useState([]);
-    let [klasoSelected, setKlasoSelected] = useState([]);
+    let [form] = Form.useForm();
 
     useEffect(() => {
         axios.get('/major/klaso').then(({ data }) => {
@@ -13,8 +14,19 @@ function TeachingPlanBuilding() {
         return () => {};
     }, []);
 
+    let onFinish = (value) => {
+        value = Object.entries(value)
+            .filter(([key, value]) => value)
+            .map(([key, value]) => key);
+        // showTeachingPlanEditModal();
+    };
+
+    let onReset = () => {
+        form.resetFields();
+    };
+
     return (
-        <Fragment>
+        <Form form={form} onFinish={onFinish}>
             <For each="majors" of={klasos}>
                 <Divider orientation="left" key={majors.major}>
                     {majors.major}
@@ -24,16 +36,29 @@ function TeachingPlanBuilding() {
                     dataSource={majors.klasos}
                     renderItem={({ id, name }) => (
                         <List.Item>
-                            <Card>
-                                <Checkbox value={id}>
+                            <Form.Item name={id} valuePropName="checked">
+                                <CheckedCard className="w-100">
                                     <a _href={id}>{name}</a>
-                                </Checkbox>
-                            </Card>
+                                </CheckedCard>
+                            </Form.Item>
                         </List.Item>
                     )}
                 />
             </For>
-        </Fragment>
+            <Form.Item>
+                <div
+                    className="side-toolbar btn-group-vertical position-fixed"
+                    style={{ bottom: '89px', right: '21px' }}
+                >
+                    <Button type="primary" htmlType="submit" className="btn m-2" size="large">
+                        新增
+                    </Button>
+                    <Button htmlType="button" onClick={onReset} className="btn m-2" size="large">
+                        清除
+                    </Button>
+                </div>
+            </Form.Item>
+        </Form>
     );
 }
 
