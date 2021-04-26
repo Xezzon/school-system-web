@@ -23,6 +23,7 @@
         "webpack:watch": "npx webpack serve --config .webpack/webpack.config.dev.js"
     },
     "dependencies": {
+        "@ant-design/pro-layout": "^6.17.0",
         "antd": "^4.15.2",
         "axios": "^0.21.1",
         "bootstrap": "^4.6.0",
