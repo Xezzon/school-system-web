@@ -23,6 +23,7 @@
         "webpack:watch": "npx webpack serve --config .webpack/webpack.config.dev.js"
     },
     "dependencies": {
+        "@ant-design/pro-layout": "^6.17.0",
         "antd": "^4.15.2",
         "axios": "^0.21.1",
         "bootstrap": "^4.6.0",
@@ -54,6 +55,7 @@
         "less": "^4.1.1",
         "less-loader": "^8.1.1",
         "mini-css-extract-plugin": "^1.5.0",
+        "style-loader": "^2.0.0",
         "stylelint": "^13.13.0",
         "stylelint-config-recommended": "^5.0.0",
         "thread-loader": "^3.0.3",
