@@ -1,6 +1,6 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-function RouterSwitch(routes) {
+function RouterSwitch({ routes }) {
     return <Switch>{routes.map(RouterRoute)}</Switch>;
 }
 
@@ -11,7 +11,7 @@ function RouterRoute(route) {
     if (route.routes) {
         routeList.push(...route.routes.map((route) => RouterRoute(route)));
     } else if (route.redirect) {
-        redirectList.push(<Redirect exact={route.exact} from={route.path} to={route.redirect} />)
+        redirectList.push(<Redirect exact={route.exact} from={route.path} to={route.redirect} />);
     } else {
         routeList.push(<Route path={route.path} component={route.component} />);
     }
