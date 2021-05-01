@@ -8,7 +8,7 @@ const resolve = (relativePath) => path.resolve(__dirname, '../', relativePath);
 
 const webpackCommonConfig = {
     entry: {
-        index: '@/pages/index',
+        jwc: '@/pages/jwc',
     },
     output: { path: resolve('./dist') },
     resolve: {
@@ -24,12 +24,26 @@ const webpackCommonConfig = {
             {
                 test: /\.js[x]?$/,
                 use: ['thread-loader', 'babel-loader?cacheDirectory=true'],
-                exclude: /[\\/]node_modules[\\/]/,
+                exclude: /node_modules/,
             },
             {
                 test: /\.(le|c)ss$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
-                exclude: /[\\/]node_modules[\\/]/,
+                include: [/src/],
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' },
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            lessOptions: { javascriptEnabled: true },
+                        },
+                    },
+                ],
+                include: [/node_modules\/antd/, /node_modules\/@ant-design\/pro-(layout|utils)/],
             },
         ],
     },
@@ -44,7 +58,7 @@ const webpackCommonConfig = {
             enforceSizeThreshold: 50000,
             cacheGroups: {
                 defaultVendors: {
-                    test: /[\\/]node_modules[\\/]/,
+                    test: /node_modules/,
                     priority: -10,
                 },
                 default: {
@@ -57,12 +71,13 @@ const webpackCommonConfig = {
     },
     plugins: [
         // 打包HTML并注入CSS、JS
-        ...[{ chunk: 'index', title: '导航页' }].map(
+        ...[{ chunk: 'jwc' }].map(
             ({ chunk, ...options }) =>
                 new HtmlWebpackPlugin({
                     template: resolve('./src/common.html'),
                     filename: `${chunk}.html`,
                     chunks: [chunk],
+                    title: '数字校园',
                     ...options,
                 })
         ),
