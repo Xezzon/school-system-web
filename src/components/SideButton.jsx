@@ -2,7 +2,7 @@ import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons'
 
 function SideButton({children}) {
     return (
-        <div className="side-toolbar btn-group-vertical" style={{ position: 'fixed', bottom: '89px', right: '21px' }}>
+        <div className="side-toolbar btn-group-vertical" style={{ position: 'fixed', bottom: '3rem', right: '1rem' }}>
             <button
                 type="button"
                 className="bg-transparent btn btn-light m-2"
