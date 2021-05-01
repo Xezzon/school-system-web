@@ -1,6 +1,7 @@
 import { lazyload } from '@/services/lazyload';
 
 export default {
+    title: '教务管理系统',
     routes: [
         {
             path: '/',
@@ -40,4 +41,5 @@ export default {
             ],
         },
     ],
+    default: '/welcome',
 };

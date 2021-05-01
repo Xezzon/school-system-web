@@ -8,7 +8,7 @@ import { render } from 'react-dom';
 import { HashRouter as Router, Link } from 'react-router-dom';
 
 function App() {
-    let [pathname, setPathname] = useState(location.hash.slice(1) || '/welcome');
+    let [pathname, setPathname] = useState(location.hash.slice(1) || route.default);
 
     useEffect(() => {
         location.hash = pathname;
@@ -25,7 +25,7 @@ function App() {
     return (
         <Router>
             <ProLayout
-                title="教务管理系统"
+                title={route.title}
                 route={route}
                 location={{ pathname }}
                 layout="mix"
@@ -36,6 +36,7 @@ function App() {
                 headerTheme="light"
                 rightContentRender={headerRightContent}
                 fixedHeader={true}
+                collapsed={false}
             >
                 <PageContainer
                     header={{
