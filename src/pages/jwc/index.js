@@ -1,4 +1,4 @@
-import MixLayout from '@/components/MixLayout.jsx';
+import { MixLayout } from '@/components';
 import { render } from 'react-dom';
 import studentRoute from './student/route';
 

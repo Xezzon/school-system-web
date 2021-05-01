@@ -11,7 +11,7 @@ export default {
         {
             path: '/welcome',
             name: '欢迎',
-            component: lazyload(() => import('./Welcome')),
+            component: lazyload(import('./Welcome')),
         },
         {
             path: '/course',
@@ -20,12 +20,12 @@ export default {
                 {
                     path: '/course/required',
                     name: '必修课',
-                    component: lazyload(() => import('./course/Required')),
+                    component: lazyload(import('./course/Required')),
                 },
                 {
                     path: '/course/elective',
                     name: '选修课',
-                    component: lazyload(() => import('./course/Elective')),
+                    component: lazyload(import('./course/Elective')),
                 },
             ],
         },
@@ -36,7 +36,7 @@ export default {
                 {
                     path: '/exam/exam',
                     name: '考试',
-                    component: lazyload(() => import('./exam/Exam')),
+                    component: lazyload(import('./exam/Exam')),
                 },
             ],
         },

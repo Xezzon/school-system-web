@@ -20,7 +20,7 @@ const suspend = (WrappedComponent) => () => (
 );
 
 function lazyload(componentPromise) {
-    return suspend(lazy(componentPromise));
+    return suspend(lazy(() => componentPromise));
 }
 
 export { lazyload, suspend, Loading };

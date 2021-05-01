@@ -1,4 +1,4 @@
-import RouterSwitch from '@/services/router-switch';
+import { RouterSwitch } from '@/components';
 import { UserOutlined } from '@ant-design/icons';
 import ProLayout, { PageContainer } from '@ant-design/pro-layout';
 import { Avatar } from 'antd';
