@@ -8,7 +8,7 @@ const resolve = (relativePath) => path.resolve(__dirname, '../', relativePath);
 
 const webpackCommonConfig = {
     entry: {
-        index: '@/pages/index',
+        jwc: '@/pages/jwc',
     },
     output: { path: resolve('./dist') },
     resolve: {
@@ -71,12 +71,13 @@ const webpackCommonConfig = {
     },
     plugins: [
         // 打包HTML并注入CSS、JS
-        ...[{ chunk: 'index', title: '导航页' }].map(
+        ...[{ chunk: 'jwc' }].map(
             ({ chunk, ...options }) =>
                 new HtmlWebpackPlugin({
                     template: resolve('./src/common.html'),
                     filename: `${chunk}.html`,
                     chunks: [chunk],
+                    title: '数字校园',
                     ...options,
                 })
         ),

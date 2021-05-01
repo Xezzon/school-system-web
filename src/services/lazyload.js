@@ -12,7 +12,7 @@ function Loading() {
     );
 }
 
-
+// eslint-disable-next-line react/display-name
 const suspend = (WrappedComponent) => () => (
     <Suspense fallback={<Loading />}>
         <WrappedComponent />
