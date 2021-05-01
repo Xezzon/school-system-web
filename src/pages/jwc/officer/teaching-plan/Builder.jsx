@@ -3,7 +3,7 @@ import axios from '@/services/axios';
 import { Button, Divider, Form, List } from 'antd';
 import { useEffect, useState } from 'react';
 
-function TeachingPlanBuilding() {
+function TeachingPlanBuilder() {
     let [klasos, setKlasos] = useState([]);
     let [form] = Form.useForm();
 
@@ -18,7 +18,6 @@ function TeachingPlanBuilding() {
         value = Object.entries(value)
             .filter(([key, value]) => value)
             .map(([key, value]) => key);
-        // showTeachingPlanEditModal();
     };
 
     let onReset = () => {
@@ -62,4 +61,4 @@ function TeachingPlanBuilding() {
     );
 }
 
-export default TeachingPlanBuilding;
+export default TeachingPlanBuilder;
