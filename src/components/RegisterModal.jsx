@@ -9,7 +9,7 @@ function RegisterModal(props, ref) {
     let [form] = Form.useForm();
 
     useEffect(() => {
-        axios.get('/roles').then(({ data }) => {
+        axios.get('/auth/roles').then(({ data }) => {
             setRoleList(data);
         });
     }, []);
