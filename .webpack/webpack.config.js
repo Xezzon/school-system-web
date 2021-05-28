@@ -8,12 +8,13 @@ const resolve = (relativePath) => path.resolve(__dirname, '../', relativePath);
 
 const webpackCommonConfig = {
     entry: {
-        easm: '@/pages/easm',
+        eams: '@/pages/eams',
     },
     output: { path: resolve('./dist') },
     resolve: {
         alias: {
             '@': resolve('./src'),
+            '~': resolve('./'),
             // 减少重复打包
             'bn.js': path.resolve(process.cwd(), 'node_modules', 'bn.js'),
         },
@@ -71,10 +72,10 @@ const webpackCommonConfig = {
     },
     plugins: [
         // 打包HTML并注入CSS、JS
-        ...[{ chunk: 'easm' }].map(
+        ...[{ chunk: 'eams' }].map(
             ({ chunk, ...options }) =>
                 new HtmlWebpackPlugin({
-                    template: resolve('./src/common.html'),
+                    template: resolve('./public/index.html'),
                     filename: `${chunk}.html`,
                     chunks: [chunk],
                     title: '数字校园',
@@ -84,8 +85,8 @@ const webpackCommonConfig = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: resolve('./src/resources'),
-                    to: 'static',
+                    from: resolve('./public'),
+                    to: 'assets',
                 },
             ],
         }),
