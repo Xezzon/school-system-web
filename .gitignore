@@ -53,6 +53,7 @@ typings/
 # Lock file
 package-lock.json
 yarn.lock
+pnpm-lock.yaml
 
 # Optional eslint cache
 .eslintcache
