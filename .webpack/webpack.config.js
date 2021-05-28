@@ -43,7 +43,7 @@ const webpackCommonConfig = {
                         },
                     },
                 ],
-                include: [/node_modules\/antd/, /node_modules\/@ant-design\/pro-(layout|utils)/],
+                include: [/node_modules[\\/]antd/, /node_modules[\\/]@ant-design[\\/]pro-(layout|utils)/],
             },
         ],
     },
