@@ -8,9 +8,9 @@ function RouterSwitch({ routes }) {
         if (route.routes) {
             routeList.push(...route.routes.map((route) => route2component(route)));
         } else if (route.redirect) {
-            redirectList.push(<Redirect exact={route.exact} from={route.path} to={route.redirect} />);
+            redirectList.push(<Redirect exact={true} from={route.path} to={route.redirect} />);
         } else {
-            routeList.push(<Route path={route.path} component={route.component} />);
+            routeList.push(<Route exact={true} path={route.path} component={route.component} />);
         }
         return [...routeList, ...redirectList];
     };
