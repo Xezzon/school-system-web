@@ -19,8 +19,8 @@
         "lint-fix:script": "npm run lint:script -- --fix",
         "test": "echo \"Error: no test specified\" && exit 1",
         "webpack:analyze": "npx webpack --config .webpack/webpack.config.prod.js --progress=profile --analyze --no-stats",
-        "webpack:build": "npx webpack --config .webpack/webpack.config.prod.js",
-        "webpack:watch": "npx webpack serve --config .webpack/webpack.config.dev.js"
+        "webpack:build": "npx webpack --config .webpack/webpack.config.prod.js --progress",
+        "webpack:watch": "npx webpack serve --config .webpack/webpack.config.dev.js --progress"
     },
     "dependencies": {
         "@ant-design/icons": "^4.6.2",

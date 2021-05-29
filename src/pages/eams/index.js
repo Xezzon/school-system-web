@@ -2,8 +2,8 @@ import { MixLayout } from '@/components';
 import { render } from 'react-dom';
 import studentRoute from './student/route';
 
-function Easm() {
+function Eams() {
     return <MixLayout route={studentRoute} />;
 }
 
-render(<Easm />, document.getElementById('rc'));
+render(<Eams />, document.getElementById('rc'));
