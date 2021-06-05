@@ -13,13 +13,17 @@ export default {
             name: '教学计划',
             routes: [
                 {
+                    path: '/teaching-plan/index',
+                    name: '总览',
+                },
+                {
                     path: '/teaching-plan/builder',
                     name: '新增教学计划',
-                    component: lazyload(import('./teaching-plan/Builder')),
                 },
                 {
                     path: '/teaching-plan/list',
                     name: '教学计划列表',
+                    component: lazyload(import('./teaching-plan/List'))
                 },
                 {
                     path: '/teaching-plan/other-faculty',
@@ -28,5 +32,5 @@ export default {
             ],
         },
     ],
-    default: '/teaching-plan',
+    default: '/teaching-plan/index',
 };
