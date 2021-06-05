@@ -12,4 +12,20 @@ instance.interceptors.request.use((config) => {
     return config;
 });
 
+instance.interceptors.response.use(
+    (response) => {
+        if (response.data.code === '00000') {
+            return {
+                ...response,
+                code: response.data.code,
+                message: response.data.message,
+                data: response.data.payload,
+            };
+        } else {
+            return Promise.reject(response);
+        }
+    },
+    (error) => Promise.reject(error)
+);
+
 export default instance;

@@ -42,7 +42,7 @@ const webpackDevConfig = {
                 pathRewrite: { '^/api': '' },
             },
             '/api/eams': {
-                target: 'http://localhost:40001/mock/49/',
+                target: 'http://localhost:40001/mock/11/',
                 changeOrigin: true,
                 pathRewrite: { '^/api': '' },
             },
