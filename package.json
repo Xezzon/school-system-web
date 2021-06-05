@@ -12,15 +12,15 @@
     "scripts": {
         "docker:build": "docker build -t school-system-web:$npm_package_version .",
         "lint": "npm run lint:style && npm run lint:script",
-        "lint:style": "npx stylelint 'src/**/*.less' --syntax less",
-        "lint:script": "npx eslint src --ext '.js,.jsx'",
+        "lint:style": "pnpx stylelint 'src/**/*.less' --syntax less",
+        "lint:script": "pnpx eslint src --ext '.js,.jsx'",
         "lint-fix": "npm run lint-fix:style && npm run lint-fix:script",
         "lint-fix:style": "npm run lint:style -- --fix",
         "lint-fix:script": "npm run lint:script -- --fix",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "webpack:analyze": "npx webpack --config .webpack/webpack.config.prod.js --progress=profile --analyze --no-stats",
-        "webpack:build": "npx webpack --config .webpack/webpack.config.prod.js --progress",
-        "webpack:watch": "npx webpack serve --config .webpack/webpack.config.dev.js --progress"
+        "webpack:analyze": "pnpx webpack --config .webpack/webpack.config.prod.js --progress=profile --analyze --no-stats",
+        "webpack:build": "pnpx webpack --config .webpack/webpack.config.prod.js --progress",
+        "webpack:watch": "pnpx webpack serve --config .webpack/webpack.config.dev.js --progress"
     },
     "dependencies": {
         "@ant-design/icons": "^4.6.2",
