@@ -36,8 +36,13 @@ const webpackDevConfig = {
         compress: true,
         // 动态请求转发
         proxy: {
-            '/api': {
-                target: 'https://nei.netease.com/api/apimock-v2/ec1c48031cd790750f64146ff6e8024c/',
+            '/api/auth': {
+                target: 'http://localhost:40001/mock/48/',
+                changeOrigin: true,
+                pathRewrite: { '^/api': '' },
+            },
+            '/api/eams': {
+                target: 'http://localhost:40001/mock/49/',
                 changeOrigin: true,
                 pathRewrite: { '^/api': '' },
             },

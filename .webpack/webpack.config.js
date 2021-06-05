@@ -8,12 +8,13 @@ const resolve = (relativePath) => path.resolve(__dirname, '../', relativePath);
 
 const webpackCommonConfig = {
     entry: {
-        jwc: '@/pages/jwc',
+        eams: '@/pages/eams',
     },
     output: { path: resolve('./dist') },
     resolve: {
         alias: {
             '@': resolve('./src'),
+            '~': resolve('./'),
             // 减少重复打包
             'bn.js': path.resolve(process.cwd(), 'node_modules', 'bn.js'),
         },
@@ -43,7 +44,7 @@ const webpackCommonConfig = {
                         },
                     },
                 ],
-                include: [/node_modules\/antd/, /node_modules\/@ant-design\/pro-(layout|utils)/],
+                include: [/node_modules[\\/]antd/, /node_modules[\\/]@ant-design[\\/]pro-(layout|utils)/],
             },
         ],
     },
@@ -71,21 +72,25 @@ const webpackCommonConfig = {
     },
     plugins: [
         // 打包HTML并注入CSS、JS
-        ...[{ chunk: 'jwc' }].map(
-            ({ chunk, ...options }) =>
-                new HtmlWebpackPlugin({
-                    template: resolve('./src/common.html'),
-                    filename: `${chunk}.html`,
-                    chunks: [chunk],
-                    title: '数字校园',
-                    ...options,
-                })
-        ),
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            chunks: ['index'],
+            title: '数字校园门户',
+            meta: {
+                keywords: '',
+                description: '',
+            },
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'eams.html',
+            chunks: ['eams'],
+            title: '教务管理系统',
+        }),
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: resolve('./src/resources'),
-                    to: 'static',
+                    from: resolve('./public'),
+                    to: 'assets',
                 },
             ],
         }),

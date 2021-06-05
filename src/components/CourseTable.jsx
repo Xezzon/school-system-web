@@ -25,7 +25,7 @@ function CourseTable() {
     };
 
     let handleElectCourse = (courseId) => {
-        axios.post(`/course/${courseId}/student`);
+        axios.post(`/eams/course/${courseId}/student`);
     };
 
     let columns = [
