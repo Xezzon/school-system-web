@@ -1,6 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { merge } = require('webpack-merge');
 const webpackCommonConfig = require('./webpack.config.js');
+const webpack = require('webpack');
 const WebpackCDNPlugin = require('webpack-cdn-plugin');
 
 const webpackDevConfig = {
@@ -22,6 +23,7 @@ const webpackDevConfig = {
             prod: false,
             publicPath: '/node_modules',
         }),
+        new webpack.HotModuleReplacementPlugin(),
     ],
     watchOptions: {
         ignored: /node_modules/,
