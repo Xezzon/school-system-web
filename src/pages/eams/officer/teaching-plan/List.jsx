@@ -22,7 +22,7 @@ function TeachingPlanList() {
                 setPagination({ ...pagination });
             })
             .catch((error) => {
-                console.warn(error);
+                console.log(error);
                 setDataSource([]);
                 setPagination({ ...pagination, current: 1, total: 0 });
             })

@@ -1,9 +1,12 @@
-import { MixLayout } from '@/components';
 import { render } from 'react-dom';
-import officerRoute from './officer/route';
+import Eams from './App';
 
-function Eams() {
-    return <MixLayout route={officerRoute} />;
+const rootEl = document.getElementById('rc');
+render(<Eams />, rootEl);
+
+if (module.hot) {
+    module.hot.accept('./App', () => {
+        const App = require('./App').default;
+        render(<Eams />, rootEl);
+    });
 }
-
-render(<Eams />, document.getElementById('rc'));
