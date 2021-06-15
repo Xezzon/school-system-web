@@ -1,6 +1,6 @@
 import { DownloadOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import axios from '@/services/axios.js';
-import { Button, Space, Table, Tooltip } from 'antd';
+import { Button, Input, Space, Table, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
 
 function TeachingPlanList() {
@@ -12,14 +12,16 @@ function TeachingPlanList() {
         fetchDataSource(pagination);
     }, []);
 
-    let fetchDataSource = (pagination, filters, sorter) => {
+    let fetchDataSource = (pagination = {}, filters = {}, { field, order } = {}) => {
         setLoading(true);
         setPagination(pagination);
         axios
-            .get('/eams/teaching-plan/list')
+            .get('/eams/teaching-plan/list', {
+                params: { filters, pagination, sorter: { field, order } },
+            })
             .then(({ data }) => {
                 setDataSource(data.items);
-                setPagination({ ...pagination });
+                setPagination({ ...pagination, total: data.total });
             })
             .catch((error) => {
                 console.log(error);
@@ -31,6 +33,8 @@ function TeachingPlanList() {
             });
     };
 
+    let renderToolbar = () => <Toolbar />;
+
     return (
         <>
             <Table
@@ -39,10 +43,14 @@ function TeachingPlanList() {
                 pagination={pagination}
                 loading={loading}
                 scroll={{ y: 370 }}
-                title={() => <Toolbar />}
+                title={renderToolbar}
                 onChange={fetchDataSource}
             >
-                <Table.Column title="序号" key="index" />
+                <Table.Column
+                    title="序号"
+                    key="index"
+                    render={(text, record, index) => (pagination.current - 1) * pagination.pageSize + (index + 1)}
+                />
                 <Table.Column title="课程名" dataIndex="name" />
                 <Table.Column title="课程类别" dataIndex="type" />
                 <Table.Column title="课程属性" dataIndex="profile" ellipsis={true} />
@@ -55,9 +63,12 @@ function TeachingPlanList() {
     );
 }
 
-function Toolbar() {
+function Toolbar({ searchValue }) {
     return (
-        <div className="toolbar d-flex justify-content-end">
+        <div className="toolbar d-flex justify-content-between">
+            <Space>
+                <Input.Search value={searchValue} placeholder="搜索功能暂不可用" disabled />
+            </Space>
             <Space>
                 <Tooltip title="添加">
                     <Button type="primary" icon={<PlusOutlined />}></Button>
