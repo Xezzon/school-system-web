@@ -39,12 +39,12 @@ const webpackDevConfig = {
         // 动态请求转发
         proxy: {
             '/api/auth': {
-                target: 'http://localhost:40001/mock/48/',
+                target: 'https://yapi.baidu.com/mock/69219/',
                 changeOrigin: true,
                 pathRewrite: { '^/api': '' },
             },
             '/api/eams': {
-                target: 'http://localhost:40001/mock/11/',
+                target: 'https://yapi.baidu.com/mock/60772/',
                 changeOrigin: true,
                 pathRewrite: { '^/api': '' },
             },
