@@ -48,6 +48,11 @@ const webpackDevConfig = {
                 changeOrigin: true,
                 pathRewrite: { '^/api': '' },
             },
+            '/api': {
+                target: 'https://yapi.baidu.com/mock/69792',
+                changeOrigin: true,
+                pathRewrite: { '^/api': '' },
+            },
         },
     },
 };
