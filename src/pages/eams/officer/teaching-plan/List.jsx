@@ -1,6 +1,13 @@
-import { DownloadOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import {
+    DeleteOutlined,
+    DownloadOutlined,
+    EditOutlined,
+    EyeOutlined,
+    PlusOutlined,
+    UploadOutlined,
+} from '@ant-design/icons';
 import axios from '@/services/axios.js';
-import { Button, Input, Space, Table, Tooltip } from 'antd';
+import { Button, Input, Popconfirm, Space, Table, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
 import TeachingPlanEditor from './EditorModal';
 
@@ -35,6 +42,12 @@ function TeachingPlanList() {
             });
     };
 
+    let handleItemDelete = (id) => {
+        axios.delete(`/eams/teaching-plan/${id}`).then(() => {
+            fetchDataSource(pagination);
+        });
+    };
+
     let renderToolbar = () => (
         <Toolbar
             handleCreate={() => {
@@ -45,9 +58,17 @@ function TeachingPlanList() {
 
     let renderHandlerButtonGroup = (value, record) => (
         <Space>
-            <Button type="link" _href={record.id}>
-                查看详情
-            </Button>
+            <Tooltip title="查看详情">
+                <Button type="primary" icon={<EyeOutlined />} _href={record.id}></Button>
+            </Tooltip>
+            <Tooltip title="编辑">
+                <Button icon={<EditOutlined />} _href={record.id}></Button>
+            </Tooltip>
+            <Popconfirm title="确认删除该项教学计划？" onConfirm={() => handleItemDelete(record.id)}>
+                <Tooltip title="删除">
+                    <Button danger icon={<DeleteOutlined />} _href={record.id}></Button>
+                </Tooltip>
+            </Popconfirm>
         </Space>
     );
 
@@ -58,7 +79,6 @@ function TeachingPlanList() {
                 rowKey={(record) => record.id}
                 pagination={pagination}
                 loading={loading}
-                scroll={{ y: 370 }}
                 title={renderToolbar}
                 onChange={fetchDataSource}
             >
@@ -69,7 +89,7 @@ function TeachingPlanList() {
                 />
                 <Table.Column title="课程名" dataIndex="name" />
                 <Table.Column title="课程类别" dataIndex="type" />
-                <Table.Column title="课程属性" dataIndex="profile" ellipsis={true} />
+                <Table.Column title="课程属性" dataIndex="profile" />
                 <Table.Column title="学分" dataIndex="credit" />
                 <Table.Column title="任课教师" dataIndex="teacher" render={({ name }) => <span>{name}</span>} />
                 <Table.Column title="总课时" dataIndex="weekhour" />
