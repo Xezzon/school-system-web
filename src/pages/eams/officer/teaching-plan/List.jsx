@@ -2,11 +2,13 @@ import { DownloadOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icon
 import axios from '@/services/axios.js';
 import { Button, Input, Space, Table, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
+import TeachingPlanEditor from './EditorModal';
 
 function TeachingPlanList() {
     let [dataSource, setDataSource] = useState([]);
     let [pagination, setPagination] = useState({ current: 1, pageSize: 15, total: 0 });
     let [loading, setLoading] = useState(false);
+    let [editorVisible, toggleEditorVisible] = useState(false);
 
     useEffect(() => {
         fetchDataSource(pagination);
@@ -33,7 +35,21 @@ function TeachingPlanList() {
             });
     };
 
-    let renderToolbar = () => <Toolbar />;
+    let renderToolbar = () => (
+        <Toolbar
+            handleCreate={() => {
+                toggleEditorVisible(true);
+            }}
+        />
+    );
+
+    let renderHandlerButtonGroup = (value, record) => (
+        <Space>
+            <Button type="link" _href={record.id}>
+                查看详情
+            </Button>
+        </Space>
+    );
 
     return (
         <>
@@ -55,15 +71,21 @@ function TeachingPlanList() {
                 <Table.Column title="课程类别" dataIndex="type" />
                 <Table.Column title="课程属性" dataIndex="profile" ellipsis={true} />
                 <Table.Column title="学分" dataIndex="credit" />
-                <Table.Column title="任课教师" dataIndex="teacher" />
-                <Table.Column title="总课时" dataIndex="" />
-                <Table.Column title="操作" key="handler" />
+                <Table.Column title="任课教师" dataIndex="teacher" render={({ name }) => <span>{name}</span>} />
+                <Table.Column title="总课时" dataIndex="weekhour" />
+                <Table.Column title="操作" key="handler" render={renderHandlerButtonGroup} />
             </Table>
+            <TeachingPlanEditor
+                visible={editorVisible}
+                onCancel={() => {
+                    toggleEditorVisible(false);
+                }}
+            />
         </>
     );
 }
 
-function Toolbar({ searchValue }) {
+function Toolbar({ searchValue, handleCreate }) {
     return (
         <div className="toolbar d-flex justify-content-between">
             <Space>
@@ -71,7 +93,7 @@ function Toolbar({ searchValue }) {
             </Space>
             <Space>
                 <Tooltip title="添加">
-                    <Button type="primary" icon={<PlusOutlined />}></Button>
+                    <Button type="primary" icon={<PlusOutlined />} onClick={handleCreate}></Button>
                 </Tooltip>
                 <Tooltip title="下载模板">
                     <Button icon={<DownloadOutlined />}></Button>
