@@ -109,7 +109,7 @@ function TeachingPlanList() {
                 courseId={selectedCourse.id}
                 onOk={() => {
                     toggleEditorVisible(false);
-                    fetchDataSource();
+                    fetchDataSource(pagination);
                 }}
                 onCancel={() => {
                     toggleEditorVisible(false);
