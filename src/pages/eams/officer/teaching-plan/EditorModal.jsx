@@ -2,7 +2,7 @@ import axios from '@/services/axios';
 import { Form, Input, InputNumber, Modal, Select } from 'antd';
 import { useEffect, useState } from 'react';
 
-function TeachingPlanEditorModal({ visible, courseId, onCancel: handleCancel }) {
+function TeachingPlanEditorModal({ visible, courseId, onOk, onCancel }) {
     let [form] = Form.useForm();
     let [initValue, setInitValue] = useState({});
     let [teacherDict, setTeacherDict] = useState([]);
@@ -45,10 +45,8 @@ function TeachingPlanEditorModal({ visible, courseId, onCancel: handleCancel }) 
     };
 
     let handleFormSubmit = () => {
-        console.debug(form.validateFields())
         form.validateFields()
             .then((values) => {
-                console.debug(values)
                 values.profile = (values.profile || []).join(';');
                 return axios({
                     url: `/eams/teaching-plan/${courseId || ''}`,
@@ -56,7 +54,8 @@ function TeachingPlanEditorModal({ visible, courseId, onCancel: handleCancel }) 
                     data: values,
                 }).then(({ data }) => {
                     console.log(data);
-                    onCancel();
+                    setInitValue({});
+                    onOk();
                 });
             })
             .catch((error) => {
@@ -64,9 +63,9 @@ function TeachingPlanEditorModal({ visible, courseId, onCancel: handleCancel }) 
             });
     };
 
-    let onCancel = () => {
+    let handleCancel = () => {
         setInitValue({});
-        handleCancel();
+        onCancel();
     };
 
     return (
@@ -76,7 +75,7 @@ function TeachingPlanEditorModal({ visible, courseId, onCancel: handleCancel }) 
             okText="提交"
             cancelText="取消"
             maskClosable={false}
-            onCancel={onCancel}
+            onCancel={handleCancel}
             onOk={handleFormSubmit}
         >
             <Form form={form} layout="vertical" initialValues={initValue}>

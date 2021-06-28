@@ -52,7 +52,7 @@ function TeachingPlanList() {
     let renderToolbar = () => (
         <Toolbar
             handleCreate={() => {
-                setSelectedCourse({})
+                setSelectedCourse({});
                 toggleEditorVisible(true);
             }}
         />
@@ -107,6 +107,10 @@ function TeachingPlanList() {
             <TeachingPlanEditor
                 visible={editorVisible}
                 courseId={selectedCourse.id}
+                onOk={() => {
+                    toggleEditorVisible(false);
+                    fetchDataSource();
+                }}
                 onCancel={() => {
                     toggleEditorVisible(false);
                 }}
