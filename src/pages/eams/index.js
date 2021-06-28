@@ -6,7 +6,6 @@ render(<Eams />, rootEl);
 
 if (module.hot) {
     module.hot.accept('./App', () => {
-        const App = require('./App').default;
         render(<Eams />, rootEl);
     });
 }
