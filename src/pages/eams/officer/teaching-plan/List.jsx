@@ -61,7 +61,7 @@ function TeachingPlanList() {
     let renderHandlerButtonGroup = (value, record) => (
         <Space>
             <Tooltip title="查看详情">
-                <Button type="primary" icon={<EyeOutlined />} _href={record.id}></Button>
+                <Button type="primary" icon={<EyeOutlined />} _href={record.id} className="d-none"></Button>
             </Tooltip>
             <Tooltip title="编辑">
                 <Button
