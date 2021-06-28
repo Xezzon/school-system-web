@@ -8,18 +8,25 @@ function TeachingPlanEditorModal({ visible, courseId, onCancel: handleCancel }) 
     let [teacherDict, setTeacherDict] = useState([]);
     let [courseTypeDict, setCourseTypeDict] = useState([]);
 
-    useEffect(() => {
-        fetchInitValue(courseId);
-    }, [courseId]);
-
+    // 获取教师、教学类型字典
     useEffect(() => {
         fetchTeacherDict();
         fetchCourseTypeDict();
     }, []);
 
+    useEffect(() => {
+        fetchInitValue(courseId);
+        form.resetFields();
+    }, [courseId]);
+
+    useEffect(() => {
+        form.resetFields();
+    }, [initValue]);
+
     let fetchInitValue = (courseId) => {
         if (courseId) {
-            axios.get(`/teaching-plan/${courseId}`).then(({ data }) => {
+            axios.get(`/eams/teaching-plan/${courseId}`).then(({ data }) => {
+                data.profile = data.profile.split(';');
                 setInitValue(data);
             });
         }
@@ -27,7 +34,6 @@ function TeachingPlanEditorModal({ visible, courseId, onCancel: handleCancel }) 
 
     let fetchTeacherDict = () => {
         axios.get(`/eams/dict/teacher/${0x0}`).then(({ data }) => {
-            console.debug(data.dict);
             setTeacherDict(data.dict);
         });
     };
@@ -39,25 +45,25 @@ function TeachingPlanEditorModal({ visible, courseId, onCancel: handleCancel }) 
     };
 
     let handleFormSubmit = () => {
-        console.debug(form.validateFields());
         form.validateFields()
             .then((values) => {
-                console.debug(1, values);
+                values.profile = values.profile.join(';');
                 return axios({
                     url: `/eams/teaching-plan/${courseId || ''}`,
                     method: courseId ? 'PUT' : 'POST',
+                    data: values,
                 }).then(({ data }) => {
                     console.log(data);
                     onCancel();
                 });
             })
             .catch((error) => {
-                console.debug(error);
+                console.log(error);
             });
     };
 
     let onCancel = () => {
-        form.resetFields();
+        setInitValue({});
         handleCancel();
     };
 
@@ -78,7 +84,9 @@ function TeachingPlanEditorModal({ visible, courseId, onCancel: handleCancel }) 
                 <Form.Item name="type" label="课程类别" rules={[{ required: true }]}>
                     <Select>
                         <For of={courseTypeDict} each="courseType">
-                            <Select.Option value={courseType.text}>{courseType.text}</Select.Option>
+                            <Select.Option value={courseType.code} key={courseType.code}>
+                                {courseType.text}
+                            </Select.Option>
                         </For>
                     </Select>
                 </Form.Item>

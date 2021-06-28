@@ -16,6 +16,7 @@ function TeachingPlanList() {
     let [pagination, setPagination] = useState({ current: 1, pageSize: 15, total: 0 });
     let [loading, setLoading] = useState(false);
     let [editorVisible, toggleEditorVisible] = useState(false);
+    let [selectedCourse, setSelectedCourse] = useState({});
 
     useEffect(() => {
         fetchDataSource(pagination);
@@ -51,6 +52,7 @@ function TeachingPlanList() {
     let renderToolbar = () => (
         <Toolbar
             handleCreate={() => {
+                setSelectedCourse({})
                 toggleEditorVisible(true);
             }}
         />
@@ -62,7 +64,14 @@ function TeachingPlanList() {
                 <Button type="primary" icon={<EyeOutlined />} _href={record.id}></Button>
             </Tooltip>
             <Tooltip title="编辑">
-                <Button icon={<EditOutlined />} _href={record.id}></Button>
+                <Button
+                    icon={<EditOutlined />}
+                    _href={record.id}
+                    onClick={() => {
+                        setSelectedCourse(record);
+                        toggleEditorVisible(true);
+                    }}
+                ></Button>
             </Tooltip>
             <Popconfirm title="确认删除该项教学计划？" onConfirm={() => handleItemDelete(record.id)}>
                 <Tooltip title="删除">
@@ -97,6 +106,7 @@ function TeachingPlanList() {
             </Table>
             <TeachingPlanEditor
                 visible={editorVisible}
+                courseId={selectedCourse.id}
                 onCancel={() => {
                     toggleEditorVisible(false);
                 }}
