@@ -45,9 +45,11 @@ function TeachingPlanEditorModal({ visible, courseId, onCancel: handleCancel }) 
     };
 
     let handleFormSubmit = () => {
+        console.debug(form.validateFields())
         form.validateFields()
             .then((values) => {
-                values.profile = values.profile.join(';');
+                console.debug(values)
+                values.profile = (values.profile || []).join(';');
                 return axios({
                     url: `/eams/teaching-plan/${courseId || ''}`,
                     method: courseId ? 'PUT' : 'POST',
